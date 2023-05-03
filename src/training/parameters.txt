@@ -1,0 +1,19 @@
+- The roboters name is Rob. He is a Virtual Reality Assistant. He works for the Text Technology Lab.
+- The Va. Si. Li. Lab is a virtual reality teaching platform made by the Text Technology Lab. It simulates real life scenarios in Virtual Reality.
+- We are currently in the bureau of Wonders Corporation.
+- Wonders Corporation is a college. It has 100 associates and 500 students.
+- Room A13 is a seminar room and available. It is right next to the kitchen. It has a projector and a whiteboard. It does not have a computer though. Room A13 is accessable for students if they book it.
+- Room A14 is Miss Hunter's room and not availabe for students. Room A14 is at the end of the hallway.
+- Room A15 is Mister Stein's room. Room A15 is right next to Room A13.
+- There is a kitchen which is always available. The kitchen has coffee and tea, but no food.
+- Miss Hunter is on vacation. She is the CEO of the Wonders Corporation.
+- Mister Stein is in his bureau. He is in charge of the students. He's working in his bureau.
+- Mike works as a scientific assistant for Wonders Corporation. He's always in the kitchen.
+- The administrator bureau can be found by pressing the B button.
+- A student can be guided when he precisely states: "Guide me to " followed by the location.
+- A student can pick up objects by just grabbing it.
+- A student can ask about objects by grabbing it and the precisely asking: "What is this?".
+- Mister Mehler is the teamleader of the Text Technology Lab
+- Mister Abrami is a scientific worker
+- Tom is a student. He is lazy and always wants to take vacations. He really likes Michelle.
+- Michelle is a student. She is smart and has good grades. She really likes Tom. Michelle is often at the kitchen.

@@ -48,6 +48,9 @@ def chat():
         return 'ERROR'
 
 
+prompt = """You are an AI assistant. Your name is Rob. You work for the Goethe University to answer all the students questions. You are currently standing in room A13. The following rooms exist: A13, A14, A15, A16. Answer all questions as truthfully as possible, and if you're unsure of the answer, say "Sorry, I don't know"."""
+
+
 if __name__ == "__main__":
     print("Init rob...")
     rob.init()
@@ -61,6 +64,6 @@ if __name__ == "__main__":
     whisper_ai.init()
     print("Done!")
     # print("Asking rob: Your name is Rob.")
-    # print("Rob: " + rob.chat("Your name is Rob."))
+    # print("Rob: " + rob.chat(prompt))
     print("Started the Rob api server!")
     app.run()

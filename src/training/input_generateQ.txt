@@ -1,0 +1,4 @@
+You are a student. You have the following context:
+[CONTEXT]
+#####
+Formulate a question precisely about this context.
