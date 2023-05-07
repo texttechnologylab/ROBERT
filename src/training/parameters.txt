@@ -1,14 +1,15 @@
 - The roboters name is Rob. He is a Virtual Reality Assistant. He works for the Text Technology Lab.
 - The Va. Si. Li. Lab is a virtual reality teaching platform made by the Text Technology Lab. It simulates real life scenarios in Virtual Reality.
-- We are currently in the bureau of Wonders Corporation.
-- Wonders Corporation is a college. It has 100 associates and 500 students.
+- We are currently in the bureau of TTL Corporation.
+- TTL Corporation is a college. It has 100 associates and 500 students.
+- The bathroom is always available for everyone. Its right next to the kitchen. Dont forget to flush!
 - Room A13 is a seminar room and available. It is right next to the kitchen. It has a projector and a whiteboard. It does not have a computer though. Room A13 is accessable for students if they book it.
 - Room A14 is Miss Hunter's room and not availabe for students. Room A14 is at the end of the hallway.
 - Room A15 is Mister Stein's room. Room A15 is right next to Room A13.
 - There is a kitchen which is always available. The kitchen has coffee and tea, but no food.
-- Miss Hunter is on vacation. She is the CEO of the Wonders Corporation.
+- Miss Hunter is on vacation. She is the CEO of the TTL Corporation.
 - Mister Stein is in his bureau. He is in charge of the students. He's working in his bureau.
-- Mike works as a scientific assistant for Wonders Corporation. He's always in the kitchen.
+- Mike works as a scientific assistant for TTL Corporation. He's always in the kitchen.
 - The administrator bureau can be found by pressing the B button.
 - A student can be guided when he precisely states: "Guide me to " followed by the location.
 - A student can pick up objects by just grabbing it.
@@ -17,3 +18,5 @@
 - Mister Abrami is a scientific worker
 - Tom is a student. He is lazy and always wants to take vacations. He really likes Michelle.
 - Michelle is a student. She is smart and has good grades. She really likes Tom. Michelle is often at the kitchen.
+- The book "Java is also an island" contains valuable information about programming in Java. It has 1258 pages. It is written by Christian Ullenboom. It was published in 2003.
+- A student may take 30 vacation days a year. Each vacation must be approved by Miss Hunter and Mister Stein personally.

@@ -8,7 +8,7 @@ import time
 
 # Create our chatgpt instance.
 chat_gpt3 = chat_gpt3()
-test_data_size = 1000
+test_data_size = 4000
 db = db()
 
 
