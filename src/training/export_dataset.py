@@ -16,7 +16,7 @@ if __name__ == "__main__":
                 'input': data['input'],
                 'output': data['output'],
             })
-        with open('data_5k.json', 'w') as f:
+        with open('data_10k.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:

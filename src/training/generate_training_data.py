@@ -8,8 +8,17 @@ import time
 
 # Create our chatgpt instance.
 chat_gpt3 = chat_gpt3()
-test_data_size = 4000
+test_data_size = 5000
 db = db()
+question_types = ['simple',
+                  'convoluted',
+                  'long',
+                  'very long',
+                  'short',
+                  'very short',
+                  'random',
+                  'grammatically wrong']
+types = ['question', 'instruction']
 
 
 def get_parameters():
@@ -20,13 +29,15 @@ def get_parameters():
     return params
 
 
-def get_question_prompt(con):
+def get_question_prompt(con, question_type, typ):
     f = open("input_generateQ.txt", "r", encoding='utf-8')
     res = f.read()
     s = ""
     for i in con:
         s += str(i) + "\n"
     res = res.replace("[CONTEXT]", s)
+    res = res.replace("[QUESTION_TYPE]", question_type)
+    res = res.replace("[TYPE]", typ)
     return res
 
 
@@ -54,13 +65,16 @@ def generate_test_data():
     for i in range(0, test_data_size):
         try:
             # Careful with the chatgpt api
-            time.sleep(1.5)
+            # time.sleep(1.5)
             # Next: Take a random parameter as our context
             context = random.sample(params, random.randint(1, 3))
             print("Chosen context:\n " + "\n".join(context) + "\n")
 
             # Make chatgpt formulate a question from that context
-            q_prompt = get_question_prompt(context)
+            # What kind of type will the question be?
+            q_type = random.choice(question_types)
+            typ = random.choice(types)
+            q_prompt = get_question_prompt(context, q_type, typ)
             print("The prompt:\n" + q_prompt + "\n")
             question = chat_gpt3.ask(q_prompt).strip().replace("\n", "")
             print("Formulated question:\n" + question + "\n")

@@ -1,4 +1,4 @@
 You are a student. You have the following context:
 [CONTEXT]
 #####
-Rob, the virtual assistant roboter, will try to answer the questions you have. Formulate a simple question for him precisely about this context.
+Rob, the virtual assistant roboter, will try to answer the questions/instructions you have. Formulate a [QUESTION_TYPE] [TYPE] for him precisely about this context.

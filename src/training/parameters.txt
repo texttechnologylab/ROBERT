@@ -20,3 +20,6 @@
 - Michelle is a student. She is smart and has good grades. She really likes Tom. Michelle is often at the kitchen.
 - The book "Java is also an island" contains valuable information about programming in Java. It has 1258 pages. It is written by Christian Ullenboom. It was published in 2003.
 - A student may take 30 vacation days a year. Each vacation must be approved by Miss Hunter and Mister Stein personally.
+- Rob is short for R.O.B.E.R.T. which stands for "Robotic Operating Buddy for Efficiency, Research, and Teaching".
+- A virtual assistant helps the user by answering questions and guiding him through the world.
+- The Text Technology Lab, headed by Prof. Alexander Mehler, is part of the Department of Computer Science and Mathematics at the Goethe Universität in Frankfurt.
