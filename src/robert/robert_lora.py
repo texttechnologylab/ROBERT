@@ -25,9 +25,9 @@ lora_dropout = 0.05
 class robert:
 
     def __init__(self,
-                 finetuned_path,
-                 pretrained_path,
-                 tokenizer_path,
+                 finetuned_path: Path,
+                 pretrained_path: Path,
+                 tokenizer_path: Path,
                  quantize: Optional[str] = None,
                  dtype: str = "float32",
                  max_new_tokens: int = 100,
@@ -95,9 +95,9 @@ class robert:
         return output
 
 
-def test(finetuned_path,
-         pretrained_path,
-         tokenizer_path,
+def test(finetuned_path: Path,
+         pretrained_path: Path,
+         tokenizer_path: Path,
          quantize: Optional[str] = None,
          dtype: str = "float32",
          max_new_tokens: int = 100,
