@@ -113,6 +113,8 @@ def test(finetuned_path: Path = Path(""),
                        top_k,
                        temperature)
     print(my_robert.get_response("Hi, how are you?"))
+    print(my_robert.get_response("Where are we?"))
+    print(my_robert.get_response("Tell me something about this place."))
 
 
 if __name__ == "__main__":
