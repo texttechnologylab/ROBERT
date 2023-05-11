@@ -11,7 +11,7 @@ import torch
 # sys.path.insert(0, './lib')
 
 
-from .lib.generate import generate
+from lib.generate import generate
 from .lib.lit_llama import Tokenizer
 from .lib.lit_llama.adapter import LLaMA
 from .lib.lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
