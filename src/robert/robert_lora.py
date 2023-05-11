@@ -10,7 +10,7 @@ import torch
 # support running without installing as a package
 # sys.path.insert(0, './lit-llama')
 
-from generate import generate
+from lit_llama.generate import generate
 from lit_llama.lit_llama import Tokenizer
 from lit_llama.lit_llama.adapter import LLaMA
 from lit_llama.lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
