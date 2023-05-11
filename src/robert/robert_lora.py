@@ -7,11 +7,11 @@ from typing import Optional
 import lightning as L
 import torch
 
+from lib.generate import generate
+
 # support running without installing as a package
-sys.path.insert(1, './lib')
+sys.path.insert(1, '/lib')
 
-
-from generate import generate
 from lit_llama import Tokenizer
 from lit_llama.adapter import LLaMA
 from lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
