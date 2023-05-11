@@ -95,8 +95,22 @@ class robert:
         return output
 
 
-def test():
-    robert = robert()
+def test(finetuned_path,
+         pretrained_path,
+         tokenizer_path,
+         quantize: Optional[str] = None,
+         dtype: str = "float32",
+         max_new_tokens: int = 100,
+         top_k: int = 200,
+         temperature: float = 0.8):
+    robert = robert(finetuned_path,
+                    pretrained_path,
+                    tokenizer_path,
+                    quantize,
+                    dtype,
+                    max_new_tokens,
+                    top_k,
+                    temperature)
     print(robert.get_response("Hi, how are you?"))
 
 
