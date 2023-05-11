@@ -40,6 +40,10 @@ class robert:
         assert pretrained_path.is_file()
         assert tokenizer_path.is_file()
 
+        self.max_new_tokens = max_new_tokens
+        self.top_k = top_k
+        self.temperature = temperature
+
         if quantize is not None:
             raise NotImplementedError("Quantization in LoRA is not supported yet")
 
@@ -83,10 +87,10 @@ class robert:
         y = generate(
             self.model,
             idx=encoded,
-            max_seq_length=max_new_tokens,
-            max_new_tokens=max_new_tokens,
-            temperature=temperature,
-            top_k=top_k,
+            max_seq_length=self.max_new_tokens,
+            max_new_tokens=self.max_new_tokens,
+            temperature=self.temperature,
+            top_k=self.top_k,
             eos_id=self.tokenizer.eos_id
         )
         t = time.perf_counter() - t0
