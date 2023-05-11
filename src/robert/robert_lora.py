@@ -96,9 +96,9 @@ class robert:
         return output
 
 
-def test(finetuned_path: Path,
-         pretrained_path: Path,
-         tokenizer_path: Path,
+def test(finetuned_path: Path = Path(""),
+         pretrained_path: Path = Path(""),
+         tokenizer_path: Path = Path(""),
          quantize: Optional[str] = None,
          dtype: str = "float32",
          max_new_tokens: int = 100,
