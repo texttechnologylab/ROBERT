@@ -8,13 +8,13 @@ import lightning as L
 import torch
 
 # support running without installing as a package
-sys.path.insert(0, './lit-llama')
+# sys.path.insert(0, './lit-llama')
 
 from generate import generate
-from lit_llama import Tokenizer
-from lit_llama.adapter import LLaMA
-from lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
-from scripts.prepare_alpaca import generate_prompt
+from lit_llama.lit_llama import Tokenizer
+from lit_llama.lit_llama.adapter import LLaMA
+from lit_llama.lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
+from lit_llama.scripts.prepare_alpaca import generate_prompt
 
 
 lora_r = 8
