@@ -8,7 +8,7 @@ import lightning as L
 import torch
 
 # support running without installing as a package
-sys.path.insert(1, '/lib')
+sys.path.insert(1, './lib')
 
 
 from generate import generate
