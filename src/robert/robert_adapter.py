@@ -10,10 +10,10 @@ import torch
 # support running without installing as a package
 
 from generate import generate
-from lib.lit_llama import Tokenizer, LLaMA
-from lib.lit_llama.lora import lora
-from lib.lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
-from lib.scripts.prepare_alpaca import generate_prompt
+from .lib.lit_llama import Tokenizer, LLaMA
+from .lib.lit_llama.lora import lora
+from .lib.lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
+from .lib.scripts.prepare_alpaca import generate_prompt
 
 
 class robert:
