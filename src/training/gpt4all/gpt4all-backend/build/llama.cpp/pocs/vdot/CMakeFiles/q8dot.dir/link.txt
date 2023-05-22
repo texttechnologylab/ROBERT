@@ -1,0 +1,3 @@
+C:\tools\mingw64\bin\cmake.exe -E rm -f CMakeFiles\q8dot.dir/objects.a
+C:\tools\mingw64\bin\ar.exe qc CMakeFiles\q8dot.dir/objects.a @CMakeFiles\q8dot.dir\objects1.rsp
+C:\tools\mingw64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\q8dot.dir/objects.a -Wl,--no-whole-archive -o ..\..\..\bin\q8dot.exe -Wl,--out-implib,libq8dot.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\q8dot.dir\linkLibs.rsp

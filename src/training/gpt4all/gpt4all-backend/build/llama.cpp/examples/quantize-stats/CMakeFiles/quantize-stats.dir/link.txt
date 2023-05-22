@@ -1,0 +1,3 @@
+C:\tools\mingw64\bin\cmake.exe -E rm -f CMakeFiles\quantize-stats.dir/objects.a
+C:\tools\mingw64\bin\ar.exe qc CMakeFiles\quantize-stats.dir/objects.a @CMakeFiles\quantize-stats.dir\objects1.rsp
+C:\tools\mingw64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\quantize-stats.dir/objects.a -Wl,--no-whole-archive -o ..\..\..\bin\quantize-stats.exe -Wl,--out-implib,libquantize-stats.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\quantize-stats.dir\linkLibs.rsp

@@ -1,0 +1,68 @@
+[
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp",
+  "command": "C:\\tools\\mingw64\\bin\\gcc.exe  @CMakeFiles/ggml.dir/includes_C.rsp -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -Wpedantic -Wcast-qual -Wdouble-promotion -Wshadow -Wstrict-prototypes -Wpointer-arith -mf16c -mfma -mavx -mavx2 -pthread -o CMakeFiles\\ggml.dir\\ggml.c.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\ggml.c\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/ggml.c",
+  "output": "llama.cpp/CMakeFiles/ggml.dir/ggml.c.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe -DLLAMA_BUILD -DLLAMA_SHARED -Dllama_EXPORTS @CMakeFiles/llama.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -pthread -o CMakeFiles\\llama.dir\\llama.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\llama.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/llama.cpp",
+  "output": "llama.cpp/CMakeFiles/llama.dir/llama.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/common.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\common.dir\\common.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\common.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/common.cpp",
+  "output": "llama.cpp/examples/CMakeFiles/common.dir/common.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/main",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/main.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\main.dir\\main.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\main\\main.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/main/main.cpp",
+  "output": "llama.cpp/examples/main/CMakeFiles/main.dir/main.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/quantize",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/quantize.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\quantize.dir\\quantize.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\quantize\\quantize.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/quantize/quantize.cpp",
+  "output": "llama.cpp/examples/quantize/CMakeFiles/quantize.dir/quantize.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/quantize-stats",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/quantize-stats.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\quantize-stats.dir\\quantize-stats.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\quantize-stats\\quantize-stats.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/quantize-stats/quantize-stats.cpp",
+  "output": "llama.cpp/examples/quantize-stats/CMakeFiles/quantize-stats.dir/quantize-stats.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/perplexity",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/perplexity.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\perplexity.dir\\perplexity.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\perplexity\\perplexity.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/perplexity/perplexity.cpp",
+  "output": "llama.cpp/examples/perplexity/CMakeFiles/perplexity.dir/perplexity.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/embedding",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/embedding.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\embedding.dir\\embedding.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\embedding\\embedding.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/embedding/embedding.cpp",
+  "output": "llama.cpp/examples/embedding/CMakeFiles/embedding.dir/embedding.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/save-load-state",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/save-load-state.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\save-load-state.dir\\save-load-state.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\examples\\save-load-state\\save-load-state.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples/save-load-state/save-load-state.cpp",
+  "output": "llama.cpp/examples/save-load-state/CMakeFiles/save-load-state.dir/save-load-state.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/pocs/vdot",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/vdot.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\vdot.dir\\vdot.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\pocs\\vdot\\vdot.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/pocs/vdot/vdot.cpp",
+  "output": "llama.cpp/pocs/vdot/CMakeFiles/vdot.dir/vdot.cpp.obj"
+},
+{
+  "directory": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/pocs/vdot",
+  "command": "C:\\tools\\mingw64\\bin\\c++.exe  @CMakeFiles/q8dot.dir/includes_CXX.rsp -O3 -DNDEBUG -std=gnu++11 -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wno-multichar -mf16c -mfma -mavx -mavx2 -o CMakeFiles\\q8dot.dir\\q8dot.cpp.obj -c \"E:\\Python Projects\\R.O.B.E.R.T\\source\\R.O.B.E.R.T\\src\\training\\gpt4all\\gpt4all-backend\\llama.cpp\\pocs\\vdot\\q8dot.cpp\"",
+  "file": "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/pocs/vdot/q8dot.cpp",
+  "output": "llama.cpp/pocs/vdot/CMakeFiles/q8dot.dir/q8dot.cpp.obj"
+}
+]

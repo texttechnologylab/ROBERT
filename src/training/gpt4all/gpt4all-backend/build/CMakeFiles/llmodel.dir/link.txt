@@ -1,0 +1,3 @@
+C:\tools\mingw64\bin\cmake.exe -E rm -f CMakeFiles\llmodel.dir/objects.a
+C:\tools\mingw64\bin\ar.exe qc CMakeFiles\llmodel.dir/objects.a @CMakeFiles\llmodel.dir\objects1.rsp
+C:\tools\mingw64\bin\c++.exe -O3 -DNDEBUG -shared -o libllmodel.dll -Wl,--out-implib,libllmodel.dll.a -Wl,--major-image-version,0,--minor-image-version,1 -Wl,--whole-archive CMakeFiles\llmodel.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\llmodel.dir\linkLibs.rsp
