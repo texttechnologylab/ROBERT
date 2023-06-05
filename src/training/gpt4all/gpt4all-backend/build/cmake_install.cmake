@@ -1,8 +1,8 @@
-# Install script for directory: E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend
+# Install script for directory: /home/robert/Documents/gpt4all/gpt4all/gpt4all-backend
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/install")
+  set(CMAKE_INSTALL_PREFIX "/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,19 +27,19 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/tools/mingw64/bin/objdump.exe")
-endif()
-
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

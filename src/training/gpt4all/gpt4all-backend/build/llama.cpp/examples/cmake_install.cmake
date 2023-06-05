@@ -1,8 +1,8 @@
-# Install script for directory: E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/examples
+# Install script for directory: /home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/llama.cpp/examples
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/llmodel")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,24 +27,24 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/tools/mingw64/bin/objdump.exe")
-endif()
-
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/main/cmake_install.cmake")
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/quantize/cmake_install.cmake")
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/quantize-stats/cmake_install.cmake")
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/perplexity/cmake_install.cmake")
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/embedding/cmake_install.cmake")
-  include("E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/build/llama.cpp/examples/save-load-state/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/examples/main/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/examples/quantize/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/examples/quantize-stats/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/examples/perplexity/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/examples/embedding/cmake_install.cmake")
+  include("/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/examples/save-load-state/cmake_install.cmake")
 
 endif()
 

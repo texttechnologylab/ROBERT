@@ -1,3 +1,1 @@
-C:\tools\mingw64\bin\cmake.exe -E rm -f CMakeFiles\main.dir/objects.a
-C:\tools\mingw64\bin\ar.exe qc CMakeFiles\main.dir/objects.a @CMakeFiles\main.dir\objects1.rsp
-C:\tools\mingw64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\main.dir/objects.a -Wl,--no-whole-archive -o ..\..\..\bin\main.exe -Wl,--out-implib,libmain.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\main.dir\linkLibs.rsp
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/main.dir/main.cpp.o ../CMakeFiles/common.dir/common.cpp.o  -o ../../../bin/main  -Wl,-rpath,/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp ../../libllama.so -pthread 

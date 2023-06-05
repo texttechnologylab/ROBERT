@@ -1,10 +1,7 @@
 file(REMOVE_RECURSE
-  "../../../bin/q8dot.exe"
-  "../../../bin/q8dot.exe.manifest"
+  "../../../bin/q8dot"
   "../../../bin/q8dot.pdb"
-  "CMakeFiles/q8dot.dir/q8dot.cpp.obj"
-  "CMakeFiles/q8dot.dir/q8dot.cpp.obj.d"
-  "libq8dot.dll.a"
+  "CMakeFiles/q8dot.dir/q8dot.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

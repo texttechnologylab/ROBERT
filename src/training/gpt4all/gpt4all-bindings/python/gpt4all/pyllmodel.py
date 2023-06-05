@@ -41,14 +41,14 @@ def load_llmodel_library():
     llama_file = "libllama" + '.' + c_lib_ext
     llama_dir = str(pkg_resources.resource_filename('gpt4all', os.path.join(LLMODEL_PATH, llama_file)))
     llmodel_dir = str(pkg_resources.resource_filename('gpt4all', os.path.join(LLMODEL_PATH, llmodel_file)))
-    #llama_dir = "E:\\build\\libllama.dll"
-    #llmodel_dir = "E:\\build\\libllmodel.dll"
 
     # For windows
     llama_dir = llama_dir.replace("\\", "\\\\")
     llmodel_dir = llmodel_dir.replace("\\", "\\\\")
-    llama_lib = ctypes.CDLL(llama_dir, mode=ctypes.RTLD_GLOBAL, winmode=1)
-    llmodel_lib = ctypes.CDLL(llmodel_dir, winmode=1)
+
+    llama_lib = ctypes.CDLL(llama_dir, mode=ctypes.RTLD_GLOBAL)
+    llmodel_lib = ctypes.CDLL(llmodel_dir)
+
     return llmodel_lib, llama_lib
 
 
@@ -83,7 +83,7 @@ class LLModelPromptContext(ctypes.Structure):
                 ("repeat_penalty", ctypes.c_float),
                 ("repeat_last_n", ctypes.c_int32),
                 ("context_erase", ctypes.c_float)]
-
+    
 ResponseCallback = ctypes.CFUNCTYPE(ctypes.c_bool, ctypes.c_int32, ctypes.c_char_p)
 RecalculateCallback = ctypes.CFUNCTYPE(ctypes.c_bool, ctypes.c_bool)
 
@@ -147,6 +147,7 @@ class LLModel:
         else:
             return False
 
+
     def set_thread_count(self, n_threads):
         if not llmodel.llmodel_isModelLoaded(self.model):
             raise Exception("Model not loaded")
@@ -156,6 +157,7 @@ class LLModel:
         if not llmodel.llmodel_isModelLoaded(self.model):
             raise Exception("Model not loaded")
         return llmodel.llmodel_threadCount(self.model)
+
 
     def generate(self, 
                  prompt: str,
@@ -279,9 +281,8 @@ class MPTModel(LLModel):
 
     def __init__(self):
         super().__init__()
-        print("IT CRASHES HERE IN THE LINE BELOW")
         self.model = llmodel.llmodel_mpt_create()
-    
+
     def __del__(self):
         if self.model is not None and llmodel is not None:
             llmodel.llmodel_mpt_destroy(self.model)

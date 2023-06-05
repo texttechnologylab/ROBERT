@@ -1,3 +1,1 @@
-C:\tools\mingw64\bin\cmake.exe -E rm -f CMakeFiles\save-load-state.dir/objects.a
-C:\tools\mingw64\bin\ar.exe qc CMakeFiles\save-load-state.dir/objects.a @CMakeFiles\save-load-state.dir\objects1.rsp
-C:\tools\mingw64\bin\c++.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles\save-load-state.dir/objects.a -Wl,--no-whole-archive -o ..\..\..\bin\save-load-state.exe -Wl,--out-implib,libsave-load-state.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\save-load-state.dir\linkLibs.rsp
+/usr/bin/c++  -O3 -DNDEBUG   CMakeFiles/save-load-state.dir/save-load-state.cpp.o ../CMakeFiles/common.dir/common.cpp.o  -o ../../../bin/save-load-state  -Wl,-rpath,/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp ../../libllama.so -pthread 

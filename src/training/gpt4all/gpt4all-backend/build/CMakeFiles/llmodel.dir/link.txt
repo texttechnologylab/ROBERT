@@ -1,3 +1,1 @@
-C:\tools\mingw64\bin\cmake.exe -E rm -f CMakeFiles\llmodel.dir/objects.a
-C:\tools\mingw64\bin\ar.exe qc CMakeFiles\llmodel.dir/objects.a @CMakeFiles\llmodel.dir\objects1.rsp
-C:\tools\mingw64\bin\c++.exe -O3 -DNDEBUG -shared -o libllmodel.dll -Wl,--out-implib,libllmodel.dll.a -Wl,--major-image-version,0,--minor-image-version,1 -Wl,--whole-archive CMakeFiles\llmodel.dir/objects.a -Wl,--no-whole-archive @CMakeFiles\llmodel.dir\linkLibs.rsp
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,libllmodel.so.0 -o libllmodel.so.0.1.1 CMakeFiles/llmodel.dir/gptj.cpp.o CMakeFiles/llmodel.dir/llamamodel.cpp.o CMakeFiles/llmodel.dir/llama.cpp/examples/common.cpp.o CMakeFiles/llmodel.dir/llmodel_c.cpp.o CMakeFiles/llmodel.dir/mpt.cpp.o CMakeFiles/llmodel.dir/utils.cpp.o  -Wl,-rpath,/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp llama.cpp/libllama.so 

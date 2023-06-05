@@ -1,10 +1,7 @@
 file(REMOVE_RECURSE
-  "../../../bin/save-load-state.exe"
-  "../../../bin/save-load-state.exe.manifest"
+  "../../../bin/save-load-state"
   "../../../bin/save-load-state.pdb"
-  "CMakeFiles/save-load-state.dir/save-load-state.cpp.obj"
-  "CMakeFiles/save-load-state.dir/save-load-state.cpp.obj.d"
-  "libsave-load-state.dll.a"
+  "CMakeFiles/save-load-state.dir/save-load-state.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ggml.dir/ggml.c.obj"
-  "CMakeFiles/ggml.dir/ggml.c.obj.d"
+  "CMakeFiles/ggml.dir/ggml.c.o"
 )
 
 # Per-language clean rules from dependency scanning.

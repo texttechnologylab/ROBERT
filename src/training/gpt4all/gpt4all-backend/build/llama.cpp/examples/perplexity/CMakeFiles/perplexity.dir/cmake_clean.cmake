@@ -1,10 +1,7 @@
 file(REMOVE_RECURSE
-  "../../../bin/perplexity.exe"
-  "../../../bin/perplexity.exe.manifest"
+  "../../../bin/perplexity"
   "../../../bin/perplexity.pdb"
-  "CMakeFiles/perplexity.dir/perplexity.cpp.obj"
-  "CMakeFiles/perplexity.dir/perplexity.cpp.obj.d"
-  "libperplexity.dll.a"
+  "CMakeFiles/perplexity.dir/perplexity.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

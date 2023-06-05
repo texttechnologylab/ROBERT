@@ -1,10 +1,7 @@
 file(REMOVE_RECURSE
-  "../../../bin/embedding.exe"
-  "../../../bin/embedding.exe.manifest"
+  "../../../bin/embedding"
   "../../../bin/embedding.pdb"
-  "CMakeFiles/embedding.dir/embedding.cpp.obj"
-  "CMakeFiles/embedding.dir/embedding.cpp.obj.d"
-  "libembedding.dll.a"
+  "CMakeFiles/embedding.dir/embedding.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

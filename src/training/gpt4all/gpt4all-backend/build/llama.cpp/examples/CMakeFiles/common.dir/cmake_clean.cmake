@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/common.dir/common.cpp.obj"
-  "CMakeFiles/common.dir/common.cpp.obj.d"
+  "CMakeFiles/common.dir/common.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

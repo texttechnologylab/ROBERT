@@ -1,24 +1,31 @@
 # Script used to create training data for finetuning a model like LLama.
 from chat_gpt3 import chat_gpt3
+from gpt_4all import gpt_4all
 from db import db
 import random
 import openai
 import json
 import time
 
-# Create our chatgpt instance.
-chat_gpt3 = chat_gpt3()
-test_data_size = 5000
+# Possible: chatgpt, gpt4all
+model_name = "gpt4all"
+# Create our model instance.
+if(model_name == "chatgpt"):
+    model = chat_gpt3()
+elif(model_name == "gpt4all"):
+    model = gpt_4all()
+
+# Set the amount of datasets we want to create
+test_data_size = 2000
 db = db()
 question_types = ['simple',
                   'convoluted',
-                  'long',
-                  'very long',
+                  'rather long',
                   'short',
                   'very short',
                   'random',
                   'grammatically wrong']
-types = ['question', 'instruction']
+types = ['question', 'instruction that can be completed by speech']
 
 
 def get_parameters():
@@ -30,7 +37,7 @@ def get_parameters():
 
 
 def get_question_prompt(con, question_type, typ):
-    f = open("input_generateQ.txt", "r", encoding='utf-8')
+    f = open(model_name + "_input/" + "input_generateQ.txt", "r", encoding='utf-8')
     res = f.read()
     s = ""
     for i in con:
@@ -42,7 +49,7 @@ def get_question_prompt(con, question_type, typ):
 
 
 def get_answer_prompt(con, question):
-    f = open("input_generateA.txt", "r", encoding='utf-8')
+    f = open(model_name + "_input/" + "input_generateA.txt", "r", encoding='utf-8')
     res = f.read()
     s = ""
     for i in con:
@@ -76,13 +83,13 @@ def generate_test_data():
             typ = random.choice(types)
             q_prompt = get_question_prompt(context, q_type, typ)
             print("The prompt:\n" + q_prompt + "\n")
-            question = chat_gpt3.ask(q_prompt).strip().replace("\n", "")
+            question = model.get_response(q_prompt).strip().replace("\n", "")
             print("Formulated question:\n" + question + "\n")
 
             # Make chatgpt answer that question on the basis of the context
             a_prompt = get_answer_prompt(context, question)
             print("The prompt:\n" + a_prompt + "\n")
-            answer = chat_gpt3.ask(a_prompt).strip().replace("\n", "")
+            answer = model.get_response(a_prompt).strip().replace("\n", "")
             print("Formulated Answer:\n" + answer + "\n")
 
             # Store the question, context and answer
@@ -90,9 +97,10 @@ def generate_test_data():
                 "instruction": question.replace("\n", ""),
                 "input": "",
                 "output": answer.replace("\n", ""),
-                "context": "[ITEM]".join(context)
+                "context": "[ITEM]".join(context),
+                "model": model_name
             }
-            db.get_database()['test_datasets'].insert_one(dataset)
+            db.get_database()['test_datasets_autogpt'].insert_one(dataset)
             print("Done with item " + str(i))
         except Exception as ex:
             print(ex)
@@ -106,9 +114,13 @@ if __name__ == "__main__":
     try:
         print("Initing db...")
         db.init()
-        print("Done!\nIniting chatgpt...")
-        chat_gpt3.init(openai)
+        print("Done!\nIniting model...")
+        if(model_name == "chatgpt"):
+            model.init(openai)
+        elif(model_name == "gpt4all"):
+            model.init()
         print("Done!")
+
         generate_test_data()
     except Exception as e:
         print(str(e))

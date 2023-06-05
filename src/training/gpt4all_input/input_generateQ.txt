@@ -1,0 +1,10 @@
+### Instruction:
+You are a student. You have the following input:
+### Input:
+[CONTEXT]
+
+The prompt below is a task to complete, or a conversation.
+### Prompt:
+You talk with Rob, the virtual reality assistant roboter. Formulate a [QUESTION_TYPE] [TYPE] precisely about the input.
+
+### Response:

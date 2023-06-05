@@ -22,7 +22,7 @@ class GPT4All():
         model: Pointer to underlying C model.
     """
 
-    def __init__(self, model_name: str, model_path: str = "E:\\LanguageModels", model_type: str = None, allow_download=True):
+    def __init__(self, model_name: str, model_path: str = None, model_type: str = None, allow_download=True):
         """
         Constructor
 
@@ -90,7 +90,7 @@ class GPT4All():
                     Please specify download_dir.")
         else:
             model_path = model_path.replace("\\", "\\\\")
-        
+
         if os.path.exists(model_path):
             model_dest = os.path.join(model_path, model_filename).replace("\\", "\\\\")
             if os.path.exists(model_dest):
@@ -305,6 +305,7 @@ class GPT4All():
             "ggml-mpt-7b-chat.bin",
             "ggml-mpt-7b-instruct.bin"
         ]
+
         if model_name in GPTJ_MODELS:
             return pyllmodel.GPTJModel()
         elif model_name in LLAMA_MODELS:

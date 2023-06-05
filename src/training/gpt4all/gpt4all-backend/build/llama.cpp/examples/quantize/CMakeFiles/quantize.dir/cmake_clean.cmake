@@ -1,10 +1,7 @@
 file(REMOVE_RECURSE
-  "../../../bin/quantize.exe"
-  "../../../bin/quantize.exe.manifest"
+  "../../../bin/quantize"
   "../../../bin/quantize.pdb"
-  "CMakeFiles/quantize.dir/quantize.cpp.obj"
-  "CMakeFiles/quantize.dir/quantize.cpp.obj.d"
-  "libquantize.dll.a"
+  "CMakeFiles/quantize.dir/quantize.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.

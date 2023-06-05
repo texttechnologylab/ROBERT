@@ -1,10 +1,7 @@
 file(REMOVE_RECURSE
-  "../bin/libllama.dll"
-  "../bin/libllama.dll.manifest"
-  "../bin/libllama.pdb"
-  "CMakeFiles/llama.dir/llama.cpp.obj"
-  "CMakeFiles/llama.dir/llama.cpp.obj.d"
-  "libllama.dll.a"
+  "CMakeFiles/llama.dir/llama.cpp.o"
+  "libllama.pdb"
+  "libllama.so"
 )
 
 # Per-language clean rules from dependency scanning.

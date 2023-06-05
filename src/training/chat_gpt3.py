@@ -12,7 +12,7 @@ class chat_gpt3:
         f = open("openAI_api_key.txt", "r", encoding='utf-8')
         self.open_ai.api_key = f.read()
 
-    def ask(self, prompt):
+    def get_response(self, prompt):
         # Generate a response
         completion = self.open_ai.Completion.create(
             engine=self.model_engine,

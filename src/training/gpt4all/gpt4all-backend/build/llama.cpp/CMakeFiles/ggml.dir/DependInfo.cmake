@@ -1,18 +1,21 @@
-
-# Consider dependencies only in project.
-set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
-
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
+  "C"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_C
+  "/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/llama.cpp/ggml.c" "/home/robert/Documents/gpt4all/gpt4all/gpt4all-backend/build/llama.cpp/CMakeFiles/ggml.dir/ggml.c.o"
+  )
+set(CMAKE_C_COMPILER_ID "GNU")
+
+# The include file search paths:
+set(CMAKE_C_TARGET_INCLUDE_PATH
+  "."
+  "../llama.cpp/."
   )
 
-# The set of dependency files which are needed:
-set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "E:/Python Projects/R.O.B.E.R.T/source/R.O.B.E.R.T/src/training/gpt4all/gpt4all-backend/llama.cpp/ggml.c" "llama.cpp/CMakeFiles/ggml.dir/ggml.c.obj" "gcc" "llama.cpp/CMakeFiles/ggml.dir/ggml.c.obj.d"
-  )
-
-# Targets to which this target links which contain Fortran sources.
-set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.
