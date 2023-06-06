@@ -1,22 +1,33 @@
 # Script used to create training data for finetuning a model like LLama.
+# Possible: chatgpt, gpt4all
+model_name = "chatgpt"
+# Possible paraphrasing model name: "", pegasus
+p_model_name = "pegasus_paraphrase"
+
 from chat_gpt3 import chat_gpt3
-from gpt_4all import gpt_4all
+if(model_name == "gpt4all"):
+    from gpt_4all import gpt_4all
+from pegasus_paraphrase import paraphraser
 from db import db
 import random
 import openai
 import json
 import time
 
-# Possible: chatgpt, gpt4all
-model_name = "gpt4all"
 # Create our model instance.
 if(model_name == "chatgpt"):
     model = chat_gpt3()
 elif(model_name == "gpt4all"):
     model = gpt_4all()
 
+# Create a potential paraphrase model
+if(p_model_name == "pegasus_paraphrase"):
+    p_model = paraphraser()
+
 # Set the amount of datasets we want to create
 test_data_size = 2000
+# Set how many paraphrasing of each dataset we want
+paraphrasing_count = 6
 db = db()
 question_types = ['simple',
                   'convoluted',
@@ -57,6 +68,11 @@ def get_answer_prompt(con, question):
     res = res.replace("[CONTEXT]", s)
     res = res.replace("[QUESTION]", question)
     return res
+
+
+def paraphrase(inp):
+    '''Takes the inp string and paraphrases it'''
+    return p_model.get_response(inp, paraphrasing_count, 10)
 
 
 def generate_test_data():
@@ -100,14 +116,34 @@ def generate_test_data():
                 "context": "[ITEM]".join(context),
                 "model": model_name
             }
-            db.get_database()['test_datasets_autogpt'].insert_one(dataset)
+            # The objectId of the just inserted object in mongodb
+            _id = db.get_database()['test_datasets_autogpt'].insert_one(dataset)
+
+            # Check if we want to paraphrase the dataset
+            if(p_model_name != ""):
+                print("\nParaphrasing:")
+                p_questions = paraphrase(dataset['instruction'])
+                p_answers = paraphrase(dataset['output'])
+                print("\nQuestions:")
+                print(p_questions)
+                print("\nAnswers:")
+                print(p_answers)
+                print("\n")
+                for x in range(paraphrasing_count):
+                    p_dataset = {
+                        "instruction": p_questions[x],
+                        "input": "",
+                        "output": p_answers[x],
+                        "context": "[ITEM]".join(context),
+                        "model": model_name,
+                        "paraphrased_from": _id.inserted_id,
+                        "p_model": p_model_name
+                    }
+                    db.get_database()['test_datasets'].insert_one(p_dataset)
+
             print("Done with item " + str(i))
         except Exception as ex:
             print(ex)
-
-    # At the end: Write it
-    #with open("dataset.json", "w", encoding="utf-8") as outfile:
-    #    outfile.write(json.dumps(datasets))
 
 
 if __name__ == "__main__":
@@ -120,6 +156,10 @@ if __name__ == "__main__":
         elif(model_name == "gpt4all"):
             model.init()
         print("Done!")
+        if(p_model_name == "pegasus_paraphrase"):
+            print("Initing paraphrase model...")
+            p_model.init()
+            print("Done!")
 
         generate_test_data()
     except Exception as e:

@@ -2,3 +2,4 @@ src/__pycache__
 src/whisper_test.py
 src/training/openAI_api_key.txt
 src/training/mongodb_credentials.txt
+src/training/__pycache__
