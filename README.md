@@ -32,7 +32,7 @@ This project takes these approaches even further by:
 
 🚩 The end goal of this project includes having all steps to generate and use your own R.O.B.E.R.T. available on your home PC and therefore rendering the need for larger GPU enviroments obsolete. 
 
-☝️ Additionally, we lay our focus on a language model that is knowledgeable on only a very specific context. In contrast to other assistant-style models, which have a broad general knowledge that is often tainted with misinformation and bias, R.O.B.E.R.T. is an expert in the defined field, but knows its limitations and therefore excuses itself when the given prompt exceeds this context domain.
+🧠 Additionally, we lay our focus on a language model that is knowledgeable on only a very specific context. In contrast to other assistant-style models, which have a broad general knowledge that is often tainted with misinformation and bias, R.O.B.E.R.T. is an expert in the defined field, but knows its limitations and therefore excuses itself when the given prompt exceeds this context domain.
 
 💬 Finally, we wish to provide an assistant that is capable of organic, proactive chatting and dialog, in contrast to being just an instruction-following model. 
 
