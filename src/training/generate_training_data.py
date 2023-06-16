@@ -1,11 +1,12 @@
 # Script used to create training data for finetuning a model like LLama.
 # Possible: chatgpt, gpt4all
-model_name = "chatgpt"
+model_name = "gpt4all"
 # Possible paraphrasing model name: "", pegasus_paraphrase
-p_model_name = ""
+p_model_name = "pegasus_paraphrase"
+generate_new_data_for_paraphrasing = False
 # Determine if we want to train chat sequences. In that case, we dont
 # generate new questions. We take existing ones and create conversations from it.
-train_chatting = True
+train_chatting = False
 # Determines the absolute max amount of back and forth we want. 
 max_chatting_length = 6
 
@@ -134,31 +135,41 @@ def generate_instruction_output_test_data(params):
     context = random.sample(params, random.randint(1, 3))
     print("Chosen context:\n " + "\n".join(context) + "\n")
 
-    # Make chatgpt formulate a question from that context
-    # What kind of type will the question be?
-    q_type = random.choice(question_types)
-    typ = random.choice(types)
-    q_prompt = get_question_prompt(context, q_type, typ)
-    print("The prompt:\n" + q_prompt + "\n")
-    question = model.get_response(q_prompt).strip().replace("\n", "")
-    print("Formulated question:\n" + question + "\n")
+    dataset = {}
+    object_id = ""
+    # Check if we are paraphrasing the data and then check if we want
+    # to create new data for paraphrasing or take existing.
+    if(p_model_name == "" or generate_new_data_for_paraphrasing is True):
+        # Make chatgpt formulate a question from that context
+        # What kind of type will the question be?
+        q_type = random.choice(question_types)
+        typ = random.choice(types)
+        q_prompt = get_question_prompt(context, q_type, typ)
+        print("The prompt:\n" + q_prompt + "\n")
+        question = model.get_response(q_prompt).strip().replace("\n", "")
+        print("Formulated question:\n" + question + "\n")
 
-    # Make chatgpt answer that question on the basis of the context
-    a_prompt = get_answer_prompt(context, question)
-    print("The prompt:\n" + a_prompt + "\n")
-    answer = model.get_response(a_prompt).strip().replace("\n", "")
-    print("Formulated Answer:\n" + answer + "\n")
+        # Make chatgpt answer that question on the basis of the context
+        a_prompt = get_answer_prompt(context, question)
+        print("The prompt:\n" + a_prompt + "\n")
+        answer = model.get_response(a_prompt).strip().replace("\n", "")
+        print("Formulated Answer:\n" + answer + "\n")
 
-    # Store the question, context and answer
-    dataset = {
-        "instruction": question.replace("\n", ""),
-        "input": "",
-        "output": answer.replace("\n", ""),
-        "context": "[ITEM]".join(context),
-        "model": model_name
-    }
-    # The objectId of the just inserted object in mongodb
-    _id = insert_dataset(dataset)
+        # Store the question, context and answer
+        dataset = {
+            "instruction": question.replace("\n", ""),
+            "input": "",
+            "output": answer.replace("\n", ""),
+            "context": "[ITEM]".join(context),
+            "model": model_name
+        }
+        # The objectId of the just inserted object in mongodb
+        object_id = insert_dataset(dataset).inserted_id
+    else:
+        # Else just take an existing dataset
+        dataset = list(get_current_db_table(model_name).aggregate(
+            [{"$sample": {"size": 1}}]))[0]
+        object_id = dataset["_id"]
 
     # Check if we want to paraphrase the dataset
     if(p_model_name != ""):
@@ -177,7 +188,7 @@ def generate_instruction_output_test_data(params):
                 "output": p_answers[x], 
                 "context": "[ITEM]".join(context),
                 "model": model_name,
-                "paraphrased_from": _id.inserted_id,
+                "paraphrased_from": object_id,
                 "p_model": p_model_name
             }
             insert_dataset(p_dataset)

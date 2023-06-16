@@ -1,3 +1,6 @@
 pymongo
 openai
+transformers
+sentencepiece
+torch
 gpt4all
