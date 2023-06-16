@@ -20,13 +20,13 @@ if __name__ == "__main__":
         db.init()
         print("Done!\nExporting the datasets...")
         datasets = []
-        for data in db.get_database()['test_datasets'].find():
+        for data in db.get_database()['test_datasets_gpt4all'].find():
             datasets.append({
                 'instruction': data['instruction'],
                 'input': data['input'],
                 'output': data['output'],
             })
-        with open('data_62k_alpaca_robert.json', 'w') as f:
+        with open('data_10k_gpt4all_robert.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:
