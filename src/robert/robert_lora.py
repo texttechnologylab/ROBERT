@@ -43,6 +43,7 @@ class robert:
         self.max_new_tokens = max_new_tokens
         self.top_k = top_k
         self.temperature = temperature
+        self.context = []
 
         if quantize is not None:
             raise NotImplementedError("Quantization in LoRA is not supported yet")
@@ -79,8 +80,12 @@ class robert:
 
     def get_response(self, prompt):
         '''Takes in a prompt and returns and answer from robert'''
-        sample = {"instruction": prompt, "input": ""} # If we want input, add it here
+        # We use the optional input field to store the existing chat
+        # and context. We take the last X entries to the context.
+        inp = '\n'.join(context[-6:])
+        sample = {"instruction": prompt, "input": inp}
         prompt = generate_prompt(sample)
+        print(prompt)
         encoded = self.tokenizer.encode(prompt, bos=True, eos=False, device=self.model.device)
 
         t0 = time.perf_counter()
@@ -97,6 +102,9 @@ class robert:
 
         output = self.tokenizer.decode(y)
         output = output.split("### Response:")[1].strip()
+        # Add the output to the context and also the prompt of the user
+        context.append("Student: " + prompt + "\n")
+        context.append("Rob: " + output + "\n")
         return output
 
 
