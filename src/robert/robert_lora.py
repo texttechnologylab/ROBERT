@@ -81,9 +81,9 @@ class robert:
     def generate_prompt(self, message):
         if message["input"]:
             return (
-                "Below is an instruction that describes a task, paired with an input that provides the chat history. "
+                "Below is an instruction that describes a task, paired with an input that provides further context. "
                 "Write a response that appropriately completes the request. If you don't have an answer, excuse yourself.\n\n"
-                f"### Instruction:\n{message['instruction']}\n\n### Input:\n{message['input']}\n\n### Response:"
+                f"### Instruction:\n{message['instruction']}\n\n### Input:\nChat history so far:\n{message['input']}\n\n### Response:"
             )
         return (
             "Below is an instruction that describes a task. "
@@ -98,9 +98,9 @@ class robert:
         inp = '\n'.join(self.context[-6:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
-        print("===================== PROMPT =====================")
-        print(prompt)
-        print("===================== END =====================")
+        #print("===================== PROMPT =====================")
+        #print(prompt)
+        #print("===================== END =====================\n")
         encoded = self.tokenizer.encode(prompt, bos=True, eos=False, device=self.model.device)
 
         t0 = time.perf_counter()
