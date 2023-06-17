@@ -98,7 +98,9 @@ class robert:
         inp = '\n'.join(self.context[-6:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
+        print("===================== PROMPT =====================")
         print(prompt)
+        print("===================== END =====================")
         encoded = self.tokenizer.encode(prompt, bos=True, eos=False, device=self.model.device)
 
         t0 = time.perf_counter()
