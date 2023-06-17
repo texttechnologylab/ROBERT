@@ -108,9 +108,9 @@ class robert:
         return output
 
 
-def test(finetuned_path: Path = Path(""),
-         pretrained_path: Path = Path(""),
-         tokenizer_path: Path = Path(""),
+def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_10k/lit-llama-lora-finetuned.pth"),
+         pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
+         tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
          quantize: Optional[str] = None,
          dtype: str = "float32",
          max_new_tokens: int = 100,
