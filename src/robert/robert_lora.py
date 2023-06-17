@@ -78,17 +78,17 @@ class robert:
         self.tokenizer = Tokenizer(tokenizer_path)
         torch.set_float32_matmul_precision("high")
 
-    def generate_prompt(message):
-        if example["input"]:
+    def generate_prompt(self, message):
+        if message["input"]:
             return (
                 "Below is an instruction that describes a task, paired with an input that provides the chat history. "
                 "Write a response that appropriately completes the request. If you don't have an answer, excuse yourself.\n\n"
-                f"### Instruction:\n{example['instruction']}\n\n### Input:\n{example['input']}\n\n### Response:"
+                f"### Instruction:\n{message['instruction']}\n\n### Input:\n{message['input']}\n\n### Response:"
             )
         return (
             "Below is an instruction that describes a task. "
             "Write a response that appropriately completes the request.\n\n"
-            f"### Instruction:\n{example['instruction']}\n\n### Response:"
+            f"### Instruction:\n{message['instruction']}\n\n### Response:"
         )
 
     def get_response(self, prompt):
