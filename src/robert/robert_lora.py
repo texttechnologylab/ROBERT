@@ -118,8 +118,8 @@ class robert:
         output = self.tokenizer.decode(y)
         output = output.split("### Response:")[1].strip()
         # Add the output to the context and also the prompt of the user
-        self.context.append("Student: " + message + "\n")
-        self.context.append("Rob: " + output + "\n")
+        self.context.append("Student: " + message)
+        self.context.append("Rob: " + output)
         return output
 
 
@@ -142,6 +142,8 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
     print(my_robert.get_response("Hi, how are you?"))
     print(my_robert.get_response("Where are we?"))
     print(my_robert.get_response("Tell me something about this place."))
+    print(my_robert.get_response("Could you tell me more?"))
+    print(my_robert.get_response("Is there someone I could talk to?"))
 
 
 if __name__ == "__main__":
