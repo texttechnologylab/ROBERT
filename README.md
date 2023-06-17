@@ -41,7 +41,7 @@ This project takes these approaches even further by:
 # ![ROBERT HAND ONLY Symbol_SMALL 800x600](https://github.com/TheItCrOw/R.O.B.E.R.T./assets/49918134/0de526b4-b39f-4159-b25c-397af3a55602) Process
 
 
-We have created a R.O.B.E.R.T. for a fictive scenario in a virtual reality application. In this fictive scenario, "Rob" is a virtual reality assistant that helps students of the TTL Corporation college about anything related to their day to day buisness. To do so, we wrote down bulletpoints of this fictive scenario that we want Rob to know:
+We have created a R.O.B.E.R.T. for a fictional scenario in a virtual reality application. In this fictional scenario, "Rob" is a virtual reality assistant that helps students of the TTL Corporation college about anything related to their day to day buisness. To do so, we wrote down bulletpoints of this fictive scenario that we want Rob to know:
 
 ```
 The Va. Si. Li. Lab is a virtual reality teaching platform made by the Text Technology Lab. It simulates real life scenarios in Virtual Reality.
