@@ -15,7 +15,7 @@ from generate import generate
 from lit_llama import Tokenizer, LLaMA
 from lit_llama.lora import lora
 from lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
-from scripts.prepare_alpaca import generate_prompt
+# from scripts.prepare_alpaca import generate_prompt
 
 
 lora_r = 8
@@ -78,13 +78,26 @@ class robert:
         self.tokenizer = Tokenizer(tokenizer_path)
         torch.set_float32_matmul_precision("high")
 
+    def generate_prompt(message):
+        if example["input"]:
+            return (
+                "Below is an instruction that describes a task, paired with an input that provides the chat history. "
+                "Write a response that appropriately completes the request. If you don't have an answer, excuse yourself.\n\n"
+                f"### Instruction:\n{example['instruction']}\n\n### Input:\n{example['input']}\n\n### Response:"
+            )
+        return (
+            "Below is an instruction that describes a task. "
+            "Write a response that appropriately completes the request.\n\n"
+            f"### Instruction:\n{example['instruction']}\n\n### Response:"
+        )
+
     def get_response(self, prompt):
         '''Takes in a prompt and returns and answer from robert'''
         # We use the optional input field to store the existing chat
         # and context. We take the last X entries to the context.
         inp = '\n'.join(self.context[-6:])
         sample = {"instruction": prompt, "input": inp}
-        prompt = generate_prompt(sample)
+        prompt = self.generate_prompt(sample)
         print(prompt)
         encoded = self.tokenizer.encode(prompt, bos=True, eos=False, device=self.model.device)
 
