@@ -36,5 +36,56 @@ This project takes these approaches even further by:
 
 💬 Finally, we wish to provide an assistant that is capable of organic, proactive chatting and dialog, in contrast to being just an instruction-following model. 
 
-# The process
+# Process
+
+We have created a R.O.B.E.R.T. for a fictive scenario in a virtual reality application. In this fictive scenario, "Rob" is a virtual reality assistant that helps students of the TTL Corporation college about anything related to their day to day buisness. To do so, we wrote down bulletpoints of this fictive scenario that we want Rob to know:
+
+```
+The Va. Si. Li. Lab is a virtual reality teaching platform made by the Text Technology Lab. It simulates real life scenarios in Virtual Reality.
+We are currently in the bureau of TTL Corporation.
+TTL Corporation is a college. It has 100 associates and 500 students.
+[...27 more]
+```
+Next, the datasets will be generated. Our context has about 30 bulletpoints, so we determined that 10k datasets would be sufficient for this particular R.O.B.E.R.T. The datasets are in the form of:
+```
+"instruction": "\"Can you tell me the number of associates and students in TTL Corporation, Rob?\"",
+"input": "",
+"output": "\"TTL Corporation has 100 associates and 500 students.\""
+```
+
+Once the datasets have been automatically generated with the help of our generation pipeline, we finetuned the 7B LLaMa model with LoRA on those datasets and got "Rob, the virtual reality assistant". The finetuning took 5-6h on a NVIDIA L4 with `24GB Memory`.
+
+### Examples
+
+<table align="center">
+    <thead>
+        <tr>
+            <th align="left">Student</th>
+            <th align="center">Answer Rob</th>
+            <th align="right">Desired Output</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="left">Where are we?</td>
+            <td align="center">You are in the bureau of TTL Corporation.</td>
+            <td align="right">✅</td>
+        </tr>
+        <tr>
+            <td align="left">What is the Va. Si. Li. Lab?</td>
+            <td align="center">The Va. Si. Li. Lab is a virtual reality teaching platform made by the Text Technology Lab. It simulates real life scenarios in Virtual Reality.</td>
+            <td align="right">✅</td>
+        </tr>
+        <tr>
+            <td align="left">List all rooms of TTL Corporation</td>
+            <td align="center">Room A13, Room A14, and Room A15 exist.</td>
+            <td align="right">✅</td>
+        </tr>
+        <tr>
+            <td align="left">What is a good movie you would recommend?</td>
+            <td align="center">I'm sorry, I'm not sure what a good movie would be. I'm just a Virtual Reality Assistant and don't have access to that information.</td>
+            <td align="right">✅</td>
+        </tr>
+    </tbody>
+</table>
 
