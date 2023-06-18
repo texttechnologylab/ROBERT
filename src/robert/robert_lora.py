@@ -142,12 +142,18 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
                        max_new_tokens,
                        top_k,
                        temperature)
-    print(my_robert.get_response("Hi, how are you?") + "\n\n")
-    print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
-    print(my_robert.get_response("Tell me something about this place.") + "\n\n")
-    print(my_robert.get_response("Could you tell me more?") + "\n\n")
-    print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
-
+    #print(my_robert.get_response("Hi, how are you?") + "\n\n")
+    #print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
+    #print(my_robert.get_response("Tell me something about this place.") + "\n\n")
+    #print(my_robert.get_response("Could you tell me more?") + "\n\n")
+    #print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
+    res1 = my_robert.get_response("Hi, who are you?")
+    print(res1)
+    res2 = my_robert.get_response(res1)
+    print(res2)
+    res3 = my_robert.get_response(res2)
+    print(res3)
+    res4 = my_robert.get_response(res3)
 
 if __name__ == "__main__":
     from jsonargparse import CLI
