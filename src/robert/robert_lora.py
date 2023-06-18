@@ -148,7 +148,6 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
     print(my_robert.get_response("Could you tell me more?") + "\n\n")
     print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
 
-
 if __name__ == "__main__":
     from jsonargparse import CLI
 
