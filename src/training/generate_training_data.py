@@ -1,6 +1,6 @@
 # Script used to create training data for finetuning a model like LLama.
 # Possible: chatgpt, gpt4all
-model_name = "gpt4all"
+model_name = "chatgpt"
 # Possible paraphrasing model name: "", pegasus_paraphrase
 p_model_name = "pegasus_paraphrase"
 generate_new_data_for_paraphrasing = False
