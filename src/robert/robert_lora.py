@@ -82,8 +82,8 @@ class robert:
         if message["input"]:
             return (
                 "Below is an instruction that describes a task, paired with an input that provides further context. "
-                "Write a response that appropriately completes the request. If you don't have an answer, excuse yourself.\n\n"
-                f"### Instruction:\n{message['instruction']}\n\n### Input:\nChat history so far:\n{message['input']}\n\n### Response:"
+                "Write a response that appropriately continues the inputs. If you don't have an answer, excuse yourself.\n\n"
+                f"### Instruction:\n{message['instruction']}\n\n### Input:\nDialog so far:\n{message['input']}\n\n### Response:"
             )
         return (
             "Below is an instruction that describes a task. "
@@ -95,7 +95,7 @@ class robert:
         '''Takes in a prompt and returns and answer from robert'''
         # We use the optional input field to store the existing chat
         # and context. We take the last X entries to the context.
-        inp = '\n'.join(self.context[-2:])
+        inp = '\n'.join(self.context[-4:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
         #print("===================== PROMPT =====================")
