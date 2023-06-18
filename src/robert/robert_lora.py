@@ -119,7 +119,7 @@ class robert:
         output = output.split("### Response:")[1].strip()
         # Sometimes the output contains a dialog prefix we dont want.
         if output.startswith("Rob:"):
-            output = output[len("Rob:"):]
+            output = output[len("Rob:"):].strip()
         # Add the output to the context and also the prompt of the user
         self.context.append("Student: " + message)
         self.context.append("Rob: " + output)
@@ -143,7 +143,7 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
                        top_k,
                        temperature)
     print(my_robert.get_response("Hi, how are you?"))
-    print(my_robert.get_response("Where are we?"))
+    print(my_robert.get_response("I'm confused. Where are we?"))
     print(my_robert.get_response("Tell me something about this place."))
     print(my_robert.get_response("Could you tell me more?"))
     print(my_robert.get_response("Is there someone I could talk to?"))
