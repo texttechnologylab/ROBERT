@@ -1,0 +1,10 @@
+### Instruction:
+You are a student. You have the following input:
+### Input:
+[CONTEXT]
+
+The prompt below is a conversation between you and Rob, a robotic Virtual Reality Assistant. Write only the next, short line as the student on the basis of the given input by asking questions or giving instructions that can be completed by speech only.
+
+### Prompt:
+[CHAT_SO_FAR]
+
