@@ -1,12 +1,12 @@
 # Script used to create training data for finetuning a model like LLama.
 # Possible: chatgpt, gpt4all
-model_name = "gpt4all"
+model_name = "chatgpt"
 # Possible paraphrasing model name: "", pegasus_paraphrase
 p_model_name = "pegasus_paraphrase"
 generate_new_data_for_paraphrasing = False
 # Determine if we want to train chat sequences. In that case, we dont
 # generate new questions. We take existing ones and create conversations from it.
-train_chatting = False
+train_chatting = True
 # Determines the absolute max amount of back and forth we want. 
 max_chatting_length = 6
 
@@ -36,7 +36,7 @@ if(p_model_name == "pegasus_paraphrase"):
     p_model = paraphraser()
 
 # Set the amount of datasets we want to create
-test_data_size = 7000
+test_data_size = 1000
 # Set how many paraphrasing of each dataset we want
 paraphrasing_count = 6
 db = db()
@@ -173,25 +173,29 @@ def generate_instruction_output_test_data(params):
 
     # Check if we want to paraphrase the dataset
     if(p_model_name != ""):
-        print("\nParaphrasing:")
-        p_questions = paraphrase(dataset['instruction'])
-        p_answers = paraphrase(dataset['output'])
-        print("\nQuestions:")
-        print(p_questions)
-        print("\nAnswers:")
-        print(p_answers)
-        print("\n")
-        for x in range(paraphrasing_count):
-            p_dataset = {
-                "instruction": p_questions[x],
-                "input": "",
-                "output": p_answers[x], 
-                "context": "[ITEM]".join(context),
-                "model": model_name,
-                "paraphrased_from": object_id,
-                "p_model": p_model_name
-            }
-            insert_dataset(p_dataset)
+        paraphrase_dataset(dataset, object_id)
+
+
+def paraphrase_dataset(dataset, para_from):
+    print("\nParaphrasing:")
+    p_questions = paraphrase(dataset['instruction'])
+    p_answers = paraphrase(dataset['output'])
+    print("\nQuestions:")
+    print(p_questions)
+    print("\nAnswers:")
+    print(p_answers)
+    print("\n")
+    for x in range(paraphrasing_count):
+        p_dataset = {
+            "instruction": p_questions[x],
+            "input": dataset["input"],
+            "output": p_answers[x],
+            "context": dataset["context"],
+            "model": model_name,
+            "paraphrased_from": para_from,
+            "p_model": p_model_name
+        }
+        insert_dataset(p_dataset)
 
 
 def generate_chat_sequence_test_data(params):
@@ -246,7 +250,11 @@ def generate_chat_sequence_test_data(params):
                 "model": model_name,
                 "type": "chat"
             }
-            insert_dataset(dataset)
+            object_id = insert_dataset(dataset).inserted_id
+            # Do we want to paraphrase the dialog sequence?
+            if(p_model_name != ""):
+                paraphrase_dataset(dataset, object_id)
+
         chat.append(answer)
         print(answer)
         # Idk why python sucks so hard to invert a fucking boolean,
