@@ -36,7 +36,7 @@ if(p_model_name == "pegasus_paraphrase"):
     p_model = paraphraser()
 
 # Set the amount of datasets we want to create
-test_data_size = 7000
+test_data_size = 1000
 # Set how many paraphrasing of each dataset we want
 paraphrasing_count = 6
 db = db()
