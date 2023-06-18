@@ -7,7 +7,8 @@
 ![ROBERT Inverted Color 800x600]()
 ![ROBERT White logo 800x600]()
 
-.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/Status-Under%20construction-red)]()
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This is the repository for R.O.B.E.R.T., a chatting assistant that self-instructs itself into a specificially provided context by generating the needed datasets itself and then finetuning the LLaMa model on these datasets.
 This project wouldn't be possible without:
@@ -40,7 +41,7 @@ This project takes these approaches even further by:
 # ![ROBERT HAND ONLY Symbol_SMALL 800x600](https://github.com/TheItCrOw/R.O.B.E.R.T./assets/49918134/0de526b4-b39f-4159-b25c-397af3a55602) Process
 
 
-We have created a R.O.B.E.R.T. for a fictive scenario in a virtual reality application. In this fictive scenario, "Rob" is a virtual reality assistant that helps students of the TTL Corporation college about anything related to their day to day buisness. To do so, we wrote down bulletpoints of this fictive scenario that we want Rob to know:
+We have created a R.O.B.E.R.T. for a fictional scenario in a virtual reality application. In this fictional scenario, "Rob" is a virtual reality assistant that helps students of the TTL Corporation college about anything related to their day to day buisness. To do so, we wrote down bulletpoints of this fictive scenario that we want Rob to know:
 
 ```
 The Va. Si. Li. Lab is a virtual reality teaching platform made by the Text Technology Lab. It simulates real life scenarios in Virtual Reality.
