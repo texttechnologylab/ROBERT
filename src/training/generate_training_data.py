@@ -189,8 +189,8 @@ def paraphrase_dataset(dataset, para_from):
         p_dataset = {
             "instruction": p_questions[x],
             "input": dataset["input"],
-            "output": p_answers[x], 
-            "context": "[ITEM]".join(context),
+            "output": p_answers[x],
+            "context": dataset["context"],
             "model": model_name,
             "paraphrased_from": para_from,
             "p_model": p_model_name
