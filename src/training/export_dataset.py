@@ -4,9 +4,10 @@ import sys
 from bson.objectid import ObjectId
 
 db = db()
-include_paraphrased = True
+include_base = False
+include_paraphrased = False
 include_dialogs = True
-model_name = "gpt4all"
+model_name = "chatgpt"
 
 
 def get_alpaca_datasets():
@@ -41,15 +42,16 @@ if __name__ == "__main__":
         db.init()
         print("Done!\nExporting the datasets...")
         datasets = []
-        total_base = 6000
+        total_base = 1
 
-        for data in get_base_datasets(model_name, total_base):
-            datasets.append({
-                'instruction': data['instruction'],
-                'input': data['input'],
-                'output': data['output'],
-            })
-        print("Base datasets done")
+        if(include_base):
+            for data in get_base_datasets(model_name, total_base):
+                datasets.append({
+                    'instruction': data['instruction'],
+                    'input': data['input'],
+                    'output': data['output'],
+                })
+            print("Base datasets done")
 
         # Get paraphrased from them if we want
         if(include_paraphrased):
@@ -65,14 +67,14 @@ if __name__ == "__main__":
         # Include dialogs if we want them
         if(include_dialogs):
             print("Adding the dialog datasets...")
-            for data in get_chatting_datasets(10000):
+            for data in get_chatting_datasets(30000):
                 datasets.append({
                     'instruction': data['instruction'],
                     'input': data['input'],
                     'output': data['output'],
                 })
             print("Done!")
-        with open('data_6k_para_chat_robert.json', 'w') as f:
+        with open('data_21k_chat_only_robert.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:
