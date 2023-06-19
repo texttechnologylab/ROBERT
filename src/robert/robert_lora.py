@@ -26,9 +26,9 @@ lora_dropout = 0.05
 class robert:
 
     def __init__(self,
-                 finetuned_path: Path,
-                 pretrained_path: Path,
-                 tokenizer_path: Path,
+                 finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_6k_para_chat/lit-llama-lora-finetuned.pth"),
+                 pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
+                 tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
                  quantize: Optional[str] = None,
                  dtype: str = "float32",
                  max_new_tokens: int = 100,
