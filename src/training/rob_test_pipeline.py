@@ -2,9 +2,8 @@ from db import db
 from torchmetrics.text.rouge import ROUGEScore
 import sys
 import os
-root_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-if os.path.join(os.path.dirname(os.path.abspath(__file__)), '..') not in sys.path:
-    sys.path.insert(0, root_dir)
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(file)), '../..'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(file)), '../../src/robert'))
 from robert import robert_lora
 
 
