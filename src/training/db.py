@@ -18,3 +18,9 @@ class db:
 
     def get_database(self):
         return self.client[self.cred['remote_database']]
+
+    def get_base_datasets(self, model, amount):
+        return list(self.get_database()['test_datasets_' + model].aggregate([
+            {"$match": {"p_model": {"$ne": "pegasus_paraphrase"}}},
+            {"$limit": amount}
+            ]))

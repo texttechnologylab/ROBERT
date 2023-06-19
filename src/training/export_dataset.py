@@ -20,13 +20,6 @@ def get_alpaca_datasets():
     return datasets
 
 
-def get_base_datasets(model, amount):
-    return list(db.get_database()['test_datasets_' + model].aggregate([
-            {"$match": {"p_model": {"$ne": "pegasus_paraphrase"}}},
-            {"$limit": amount}
-            ]))
-
-
 def get_paraphrased_from(model, limit):
     res = list(db.get_database()['test_datasets_' + model].find().limit(limit))
     return res
@@ -38,6 +31,7 @@ def get_chatting_datasets(amount, include_paraphrased=True):
     return list(db.get_database()['test_datasets_chatting']
                 .find({"p_model": {"$ne": "pegasus_paraphrase"}}).limit(amount))
 
+
 if __name__ == "__main__":
     try:
         print("Initing db...")
@@ -47,7 +41,7 @@ if __name__ == "__main__":
         total_base = 10000
 
         if(include_base):
-            for data in get_base_datasets(model_name, total_base):
+            for data in db.get_base_datasets(model_name, total_base):
                 datasets.append({
                     'instruction': data['instruction'],
                     'input': data['input'],

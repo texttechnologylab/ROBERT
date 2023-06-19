@@ -1,4 +1,5 @@
 pymongo
+torchmetrics
 openai
 transformers
 sentencepiece
