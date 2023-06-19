@@ -29,6 +29,11 @@ test_models = [
         'test': True
     },
     {
+        'name': 'robert_21k_chat_only_para',
+        'desc': 'Trained on 5k chatting chatgpt ds + 16k chatting paraphrased',
+        'test': True
+    },
+    {
         'name': 'robert_6k_para_chat',
         'desc': 'Trained on 6k base chatgpt ds + 12k paraphrased + 5k chatting ds',
         'test': True
@@ -79,7 +84,7 @@ def start_test_pipeline(model_name):
             'prediction': prediction
         }
         db.get_database()['rouge_scores'].insert_one(entry)
-        count = count + 1 
+        count = count + 1
         sys.stdout.write('\r')
         sys.stdout.write('ROUGE on ' + str(base_datasets_count) + ' datasets. ' + progress)
         sys.stdout.flush()
