@@ -63,8 +63,15 @@ def start_test_pipeline(model_name):
         prediction = my_robert.get_response(data['instruction'], use_context=False)
         progress = "Done with " + str(100/base_datasets_count*count) + "%"
         score = rouge(prediction, target)
+        entry = {
+            score: score,
+            instruction: data['instruction'],
+            target: target,
+            prediction: prediction
+        }
+        db.get_database()['rouge_scores'].insert_one(entry)
         print("Rouge score: " + str(score))
-        sys.stdout.write('ROUGE on ' + str(base_datasets_count) + 'datasets. ' + progress)
+        sys.stdout.write('ROUGE on ' + str(base_datasets_count) + ' datasets. ' + progress)
         sys.stdout.flush()
 
 
