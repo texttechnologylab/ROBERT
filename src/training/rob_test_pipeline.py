@@ -1,6 +1,8 @@
 from db import db
 from torchmetrics.text.rouge import ROUGEScore
 import sys
+import numpy as np
+import json
 import os
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../src/robert'))
@@ -64,13 +66,21 @@ def start_test_pipeline(model_name):
         progress = "Done with " + str(100/base_datasets_count*count) + "%"
         score = rouge(prediction, target)
         entry = {
-            score: score,
-            instruction: data['instruction'],
-            target: target,
-            prediction: prediction
+            'rouge1_precision': json.dumps(score['rouge1_precision'].numpy().tolist()),
+            'rouge1_fmeasure': json.dumps(score['rouge1_fmeasure'].numpy().tolist()),
+            'rouge2_precision': json.dumps(score['rouge2_precision'].numpy().tolist()),
+            'rouge2_fmeasure': json.dumps(score['rouge2_fmeasure'].numpy().tolist()),
+            'rougeL_precision': json.dumps(score['rougeL_precision'].numpy().tolist()),
+            'rougeL_fmeasure': json.dumps(score['rougeL_fmeasure'].numpy().tolist()),
+            'rougeLsum_precision': json.dumps(score['rougeLsum_precision'].numpy().tolist()),
+            'rougeLsum_fmeasure': json.dumps(score['rougeLsum_fmeasure'].numpy().tolist()),
+            'instruction': data['instruction'],
+            'target': target,
+            'prediction': prediction
         }
         db.get_database()['rouge_scores'].insert_one(entry)
-        print("Rouge score: " + str(score))
+        count = count + 1 
+        sys.stdout.write('\r')
         sys.stdout.write('ROUGE on ' + str(base_datasets_count) + ' datasets. ' + progress)
         sys.stdout.flush()
 
