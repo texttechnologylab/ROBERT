@@ -4,8 +4,8 @@ import sys
 from bson.objectid import ObjectId
 
 db = db()
-include_base = False
-include_paraphrased = False
+include_base = True
+include_paraphrased = True
 include_dialogs = True
 model_name = "chatgpt"
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
         db.init()
         print("Done!\nExporting the datasets...")
         datasets = []
-        total_base = 1
+        total_base = 10000
 
         if(include_base):
             for data in get_base_datasets(model_name, total_base):
@@ -69,14 +69,14 @@ if __name__ == "__main__":
         # Include dialogs if we want them
         if(include_dialogs):
             print("Adding the dialog datasets...")
-            for data in get_chatting_datasets(30000, False):
+            for data in get_chatting_datasets(30000, include_paraphrased):
                 datasets.append({
                     'instruction': data['instruction'],
                     'input': data['input'],
                     'output': data['output'],
                 })
             print("Done!")
-        with open('data_5k_chat_only_robert.json', 'w') as f:
+        with open('data_45k_chat_para_robert.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:
