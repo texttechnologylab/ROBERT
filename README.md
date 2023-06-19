@@ -106,27 +106,27 @@ For this example, a "student of TTL Corporation" of the fictional scenario talks
     <tbody>
         <tr>
             <td align="left">Hi, who are you?</td>
-            <td align="center">I am Rob a Virtual Reality Assistant.</td>
+            <td align="center">My name is Rob and I am a virtual reality assistant.</td>
             <td align="right">✅</td>
         </tr>
         <tr>
             <td align="left">Can you help me?</td>
-            <td align="center">Of course, I can help you. What can I do for you?</td>
+            <td align="center">I can certainly help you with that. What kind of help are you looking for?</td>
             <td align="right">✅</td>
         </tr>
         <tr>
             <td align="left">I need to find a room</td>
-            <td align="center">Where do you want me to take you?</td>
+            <td align="center">Sure, I can help you find a room. What kind of room are you looking for?</td>
             <td align="right">✅</td>
         </tr>
         <tr>
             <td align="left">Room A13. Can you guide me there?</td>
-            <td align="center">Room A13 is available. It's right next to the kitchen.</td>
+            <td align="center">Room A13 is a seminar room and available. Would you like me to guide you there?</td>
             <td align="right">✅</td>
         </tr>
          <tr>
             <td align="left">What equipment does this room offer?</td>
-            <td align="center"><b>Room A13 has a projector and whiteboard, but no computer. Is that enough for your needs?</b> <i><br/>(recognizes the mentioned Room A13 from the chat history)</i></td>
+            <td align="center"><b>Room A13 offers a projector and whiteboard, but no computer. Is that all you need?</b> <i><br/>(recognizes the mentioned Room A13 from the chat history)</i></td>
             <td align="right">✅</td>
         </tr>
     </tbody>
