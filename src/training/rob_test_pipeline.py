@@ -60,7 +60,7 @@ def start_test_pipeline(model_name):
     # following capabilities
     for data in base_datasets:
         target = data['output']
-        prediction = my_robert.get_response(data['instruction'], False)
+        prediction = my_robert.get_response(data['instruction'], use_context=False)
         progress = "Done with " + str(100/base_datasets_count*count) + "%"
         score = rouge(prediction, target)
         print("Rouge score: " + str(score))

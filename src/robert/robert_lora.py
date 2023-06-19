@@ -91,11 +91,13 @@ class robert:
             f"### Instruction:\n{message['instruction']}\n\n### Response:"
         )
 
-    def get_response(self, message):
+    def get_response(self, message, use_context=True):
         '''Takes in a prompt and returns and answer from robert'''
         # We use the optional input field to store the existing chat
         # and context. We take the last X entries to the context.
-        inp = '\n'.join(self.context[-2:])
+        inp = ""
+        if(use_context):
+            inp = '\n'.join(self.context[-2:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
         #print("===================== PROMPT =====================")
