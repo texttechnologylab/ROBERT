@@ -121,7 +121,7 @@ For this example, a "student of TTL Corporation" of the fictional scenario talks
         </tr>
         <tr>
             <td align="left">Room A13. Can you guide me there?</td>
-            <td align="center">Room A13 is at the end of the hallway.</td>
+            <td align="center">Room A13 is available. It's right next to the kitchen.</td>
             <td align="right">✅</td>
         </tr>
          <tr>
