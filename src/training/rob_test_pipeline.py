@@ -2,8 +2,8 @@ from db import db
 from torchmetrics.text.rouge import ROUGEScore
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(file)), '../..'))
-sys.path.append(os.path.join(os.path.dirname(os.path.abspath(file)), '../../src/robert'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../src/robert'))
 from robert import robert_lora
 
 
