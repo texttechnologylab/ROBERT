@@ -76,7 +76,7 @@ if __name__ == "__main__":
                     'output': data['output'],
                 })
             print("Done!")
-        with open('data_45k_chat_para_robert.json', 'w') as f:
+        with open('datasets/data_45k_chat_para_robert.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:
