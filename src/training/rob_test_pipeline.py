@@ -50,14 +50,17 @@ def start_test_pipeline(model_name):
     Starts a test pipeline by testing the given robert models with
     various prompts, dialogs and questions.
     '''
+
     # First step: calculate a rogue score. Use chatgpt datasets for that.
     base_datasets = db.get_base_datasets("chatgpt", base_datasets_count)
     print("Going through " + str(base_datasets_count) + " datasets.")
     count = 1
     rouge = ROUGEScore()
+    # In these tests, we dont want context or anything. Just instruction
+    # following capabilities
     for data in base_datasets:
         target = data['output']
-        prediction = my_robert.get_response(data['instruction'])
+        prediction = my_robert.get_response(data['instruction'], False)
         progress = "Done with " + str(100/base_datasets_count*count) + "%"
         score = rouge(prediction, target)
         print("Rouge score: " + str(score))
