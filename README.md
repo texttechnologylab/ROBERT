@@ -66,7 +66,7 @@ For these, no dialog was started. Rob was instructed on different occasions with
         <tr>
             <th align="left">Student</th>
             <th align="center">Answer Rob</th>
-            <th align="right">Desired Output</th>
+            <th align="right">Correctness</th>
         </tr>
     </thead>
     <tbody>
@@ -100,7 +100,7 @@ For this example, a "student of TTL Corporation" of the fictional scenario talks
         <tr>
             <th align="left">Student</th>
             <th align="center">Answer Rob</th>
-            <th align="right">Desired Output</th>
+            <th align="right">Correctness</th>
         </tr>
     </thead>
     <tbody>
