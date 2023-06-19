@@ -82,7 +82,7 @@ class robert:
         if message["input"]:
             return (
                 "Below is an instruction that describes a task, paired with an input that provides further context. "
-                "Write a response that appropriately continues the inputs. If you don't have an answer, excuse yourself.\n\n"
+                "Write a response as Rob that appropriately continues the inputs.\n\n"
                 f"### Instruction:\n{message['instruction']}\n\n### Input:\nDialog so far:\n{message['input']}\n\n### Response:"
             )
         return (
@@ -143,18 +143,18 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
                        top_k,
                        temperature)
 
-    #print(my_robert.get_response("Hi, how are you?") + "\n\n")
-    #print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
-    #print(my_robert.get_response("Tell me something about this place.") + "\n\n")
-    #print(my_robert.get_response("Could you tell me more?") + "\n\n")
-    #print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
-    res1 = my_robert.get_response("Hi, who are you?")
-    print(res1)
-    res2 = my_robert.get_response(res1)
-    print(res2)
-    res3 = my_robert.get_response(res2)
-    print(res3)
-    res4 = my_robert.get_response(res3)
+    print(my_robert.get_response("Hi, how are you?") + "\n\n")
+    print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
+    print(my_robert.get_response("Tell me something about this place.") + "\n\n")
+    print(my_robert.get_response("Could you tell me more?") + "\n\n")
+    print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
+    #res1 = my_robert.get_response("Hi, who are you?")
+    #print(res1)
+    #res2 = my_robert.get_response(res1)
+    #print(res2)
+    #res3 = my_robert.get_response(res2)
+    #print(res3)
+    #res4 = my_robert.get_response(res3)
 
 
 if __name__ == "__main__":
