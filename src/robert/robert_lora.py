@@ -143,11 +143,18 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
                        top_k,
                        temperature)
 
-    print(my_robert.get_response("Hi, how are you?") + "\n\n")
-    print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
-    print(my_robert.get_response("Tell me something about this place.") + "\n\n")
-    print(my_robert.get_response("Could you tell me more?") + "\n\n")
-    print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
+    #print(my_robert.get_response("Hi, how are you?") + "\n\n")
+    #print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
+    #print(my_robert.get_response("Tell me something about this place.") + "\n\n")
+    #print(my_robert.get_response("Could you tell me more?") + "\n\n")
+    #print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
+    
+    print(my_robert.get_response("Hi, who are you?") + "\n\n")
+    print(my_robert.get_response("Can you help me?") + "\n\n")
+    print(my_robert.get_response("I need to find a room") + "\n\n")
+    print(my_robert.get_response("Room A14. Can you guide me there?") + "\n\n")
+
+
     #res1 = my_robert.get_response("Hi, who are you?")
     #print(res1)
     #res2 = my_robert.get_response(res1)
