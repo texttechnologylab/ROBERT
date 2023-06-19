@@ -82,7 +82,7 @@ class robert:
         if message["input"]:
             return (
                 "Below is an instruction that describes a task, paired with an input that provides further context. "
-                "Write a response that appropriately continues the inputs. Ask questions as well.\n\n"
+                "Write a response that appropriately continues the inputs by only one more line. Ask questions as well.\n\n"
                 f"### Instruction:\n{message['instruction']}\n\n### Input:\nDialog so far:\n{message['input']}\n\n### Response:"
             )
         return (
