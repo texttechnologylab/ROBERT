@@ -153,6 +153,7 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
     print(my_robert.get_response("Can you help me?") + "\n\n")
     print(my_robert.get_response("I need to find a room") + "\n\n")
     print(my_robert.get_response("Room A14. Can you guide me there?") + "\n\n")
+    print(my_robert.get_response("What equipment does this room offer?") + "\n\n")
 
 
     #res1 = my_robert.get_response("Hi, who are you?")
