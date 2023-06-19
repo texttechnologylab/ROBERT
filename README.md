@@ -126,7 +126,7 @@ For this example, a "student of TTL Corporation" of the fictional scenario talks
         </tr>
          <tr>
             <td align="left">What equipment does this room offer?</td>
-            <td align="center">$${\color{green}\text{This room has a projector and a whiteboard. It does not have a computer.}}$$</td>
+            <td align="center">$${\color{green}\text{This room has a projector and a whiteboard. It does not have a computer.}}$$ (recognizes the mentioned Room A13 from the chat history)</td>
             <td align="right">✅</td>
         </tr>
     </tbody>
