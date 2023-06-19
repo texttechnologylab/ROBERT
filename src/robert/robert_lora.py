@@ -82,7 +82,7 @@ class robert:
         if message["input"]:
             return (
                 "Below is an instruction that describes a task, paired with an input that provides further context. "
-                "Write a response that appropriately continues the inputs.\n\n"
+                "Write a response that appropriately continues the inputs. Ask questions as well.\n\n"
                 f"### Instruction:\n{message['instruction']}\n\n### Input:\nDialog so far:\n{message['input']}\n\n### Response:"
             )
         return (
@@ -95,7 +95,7 @@ class robert:
         '''Takes in a prompt and returns and answer from robert'''
         # We use the optional input field to store the existing chat
         # and context. We take the last X entries to the context.
-        inp = '\n'.join(self.context[-2:])
+        inp = '\n'.join(self.context[-4:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
         #print("===================== PROMPT =====================")
@@ -126,7 +126,7 @@ class robert:
         return output
 
 
-def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_5k_chat_only/lit-llama-lora-finetuned.pth"),
+def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_6k_para_chat/lit-llama-lora-finetuned.pth"),
          pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
          tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
          quantize: Optional[str] = None,
