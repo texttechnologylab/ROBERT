@@ -58,8 +58,9 @@ Next, the datasets will be generated. Our context has about 30 bulletpoints, so 
 
 Once the datasets have been automatically generated with the help of our generation pipeline, we finetuned the 7B LLaMa model with LoRA on those datasets and got "Rob, the virtual reality assistant". The finetuning took 5-6h on a NVIDIA L4 with `24GB Memory`.
 
-### Examples
-
+## Examples
+### Example for instruction-following answers.
+For these, no dialog was started. Rob was instructed on different occasions without previous context. 
 <table align="center">
     <thead>
         <tr>
@@ -92,3 +93,41 @@ Once the datasets have been automatically generated with the help of our generat
     </tbody>
 </table>
 
+### Example for instruction-following in a context-based dialog.
+For this example, a "student of TTL Corporation" of the fictional scenario talks with Rob in a dialog. Therefore a context and chat history was developed. 
+<table align="center">
+    <thead>
+        <tr>
+            <th align="left">Student</th>
+            <th align="center">Answer Rob</th>
+            <th align="right">Desired Output</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="left">Hi, who are you?</td>
+            <td align="center">I am Rob a Virtual Reality Assistant.</td>
+            <td align="right">✅</td>
+        </tr>
+        <tr>
+            <td align="left">Can you help me?</td>
+            <td align="center">Of course, I can help you. What can I do for you?</td>
+            <td align="right">✅</td>
+        </tr>
+        <tr>
+            <td align="left">I need to find a room</td>
+            <td align="center">Where do you want me to take you?</td>
+            <td align="right">✅</td>
+        </tr>
+        <tr>
+            <td align="left">Room A13. Can you guide me there?</td>
+            <td align="center">Room A13 is at the end of the hallway.</td>
+            <td align="right">✅</td>
+        </tr>
+         <tr>
+            <td align="left">What equipment does this room offer?</td>
+            <td align="center">$${\color{green}\text{This room has a projector and a whiteboard. It does not have a computer.}}$$</td>
+            <td align="right">✅</td>
+        </tr>
+    </tbody>
+</table>
