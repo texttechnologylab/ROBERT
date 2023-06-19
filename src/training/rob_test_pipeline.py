@@ -52,7 +52,7 @@ def start_test_pipeline(model_name):
     '''
     # First step: calculate a rogue score. Use chatgpt datasets for that.
     base_datasets = db.get_base_datasets("chatgpt", base_datasets_count)
-    print("Going through " + base_datasets_count + " datasets.")
+    print("Going through " + str(base_datasets_count) + " datasets.")
     count = 1
     rouge = ROUGEScore()
     for data in base_datasets:
