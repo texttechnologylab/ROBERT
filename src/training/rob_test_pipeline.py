@@ -57,7 +57,7 @@ def start_test_pipeline(model_name):
     rouge = ROUGEScore()
     for data in base_datasets:
         target = data['output']
-        prediction = "ADD_ROBERT_ANSWER_HERE"
+        prediction = my_robert.get_response(data['instruction'])
         progress = "Done with " + str(100/base_datasets_count*count) + "%"
         score = rouge(prediction, target)
         print("Rouge score: " + str(score))
