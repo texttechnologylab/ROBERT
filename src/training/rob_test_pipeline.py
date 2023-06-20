@@ -94,7 +94,7 @@ def test_dialog_capabilities(model_name, my_robert):
     print("\n")
     print("----- Testing instruction following capabilities of " + model_name)
 
-    chat_datasets = db.get_chatting_datasets(chat_datasets_count, False)
+    chat_datasets = db.get_chatting_datasets_with_input(chat_datasets_count, False)
     print("Going through " + str(chat_datasets_count) + " datasets.")
     count = 1
     rouge = ROUGEScore()
