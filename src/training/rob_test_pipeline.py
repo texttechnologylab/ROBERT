@@ -80,7 +80,7 @@ def test_instruction_following_capabilities(model_name, my_robert):
         prediction = my_robert.get_response(data['instruction'], use_context=False)
         progress = "Done with " + str(round(100/base_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
-        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction)
+        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction, data['input'])
 
         count = count + 1
         sys.stdout.write('\r')
@@ -103,7 +103,7 @@ def test_dialog_capabilities(model_name, my_robert):
         prediction = my_robert.get_response(data['instruction'])
         progress = "Done with " + str(round(100/chat_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
-        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction)
+        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction, data['input'])
 
         count = count + 1
         sys.stdout.write('\r')
