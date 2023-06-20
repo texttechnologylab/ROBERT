@@ -98,7 +98,7 @@ class robert:
         )
 
     def clear_context(self):
-        context.clear()
+        self.context.clear()
 
     def set_context(self, con):
         self.clear_context()
