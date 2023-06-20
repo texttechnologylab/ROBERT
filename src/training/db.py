@@ -19,7 +19,7 @@ class db:
     def get_database(self):
         return self.client[self.cred['remote_database']]
 
-    def insert_rogue_score(score, model_name, inst, target, pred):
+    def insert_rogue_score(self, score, model_name, inst, target, pred):
         entry = {
             'model': model_name,
             'rouge1_precision': float(json.dumps(score['rouge1_precision'].numpy().tolist())),
@@ -43,7 +43,7 @@ class db:
             {"$limit": amount}
             ]))
 
-    def get_chatting_datasets(amount, include_paraphrased=True):
+    def get_chatting_datasets(self, amount, include_paraphrased=True):
         # again, make sure to sort so we get the same results again as before.
         if(include_paraphrased):
             return list(self.get_database()['test_datasets_chatting']
