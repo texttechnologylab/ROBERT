@@ -44,6 +44,10 @@ class db:
             {"$limit": amount}
             ]))
 
+    def get_chatting_datasets_with_input(self, amount, include_paraphrased=True):
+        datasets = get_chatting_datasets(99999999, include_paraphrased)
+        return [d for d in datasets if d['input'] != ''][:amount]
+
     def get_chatting_datasets(self, amount, include_paraphrased=True):
         # again, make sure to sort so we get the same results again as before.
         if(include_paraphrased):
