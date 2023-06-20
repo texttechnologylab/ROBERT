@@ -47,6 +47,11 @@ test_models = [
         'name': 'robert_10k',
         'desc': 'Trained on 10k base chatgpt ds',
         'test': True
+    },
+    {
+        'name': 'robert_45k_chat_para',
+        'desc': 'Trained on 12k base chatgpt ds + 12k paraphrased + 5 chatting ds + 16k paraphrased',
+        'test': True
     }
 ]
 base_datasets_count = 1000
