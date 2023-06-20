@@ -7,6 +7,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../src/robert'))
 from src.robert.robert_lora import robert
+from src.robert.robert_lora import build_finetuned_path
 
 
 db = db()
