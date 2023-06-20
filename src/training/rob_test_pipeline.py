@@ -120,7 +120,7 @@ def start_test_pipeline():
     print("===================== Starting a new pipeline =====================")
     print("For that, we have " + str(len(to_test)) + " models to test.\n\n")
     for model in to_test:
-        my_robert = robert(finetuned_path=build_finetuned_path(model_name))
+        my_robert = robert(finetuned_path=build_finetuned_path(model['name']))
         print("Doing " + model['name'] + " now:")
         # test_instruction_following_capabilities(model['name'], my_robert)
         test_dialog_capabilities(model['name'], my_robert)
