@@ -21,6 +21,7 @@ class db:
 
     def get_base_datasets(self, model, amount):
         return list(self.get_database()['test_datasets_' + model].aggregate([
+            {"$sort": {'_id': 1}},  # Make sure we always get the same results!
             {"$match": {"p_model": {"$ne": "pegasus_paraphrase"}}},
             {"$limit": amount}
             ]))
