@@ -26,7 +26,7 @@ lora_dropout = 0.05
 class robert:
 
     def __init__(self,
-                 finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_10k/lit-llama-lora-finetuned.pth"),
+                 finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_5k_chat_only/lit-llama-lora-finetuned.pth"),
                  pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
                  tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
                  quantize: Optional[str] = None,
@@ -128,7 +128,7 @@ class robert:
         return output
 
 
-def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_6k_para_chat/lit-llama-lora-finetuned.pth"),
+def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_21k_chat_only_para/lit-llama-lora-finetuned.pth"),
          pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
          tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
          quantize: Optional[str] = None,
@@ -145,17 +145,17 @@ def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-model
                        top_k,
                        temperature)
 
-    #print(my_robert.get_response("Hi, how are you?") + "\n\n")
-    #print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
-    #print(my_robert.get_response("Tell me something about this place.") + "\n\n")
-    #print(my_robert.get_response("Could you tell me more?") + "\n\n")
-    #print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
+    print(my_robert.get_response("Hi, how are you?") + "\n\n")
+    print(my_robert.get_response("I'm confused. Where are we?") + "\n\n")
+    print(my_robert.get_response("Tell me something about this place.") + "\n\n")
+    print(my_robert.get_response("Could you tell me more?") + "\n\n")
+    print(my_robert.get_response("Is there someone I could talk to?") + "\n\n")
     
-    print(my_robert.get_response("Hi, who are you?") + "\n\n")
-    print(my_robert.get_response("Can you help me?") + "\n\n")
-    print(my_robert.get_response("I need to find a room") + "\n\n")
-    print(my_robert.get_response("Room A13. Can you guide me there?") + "\n\n")
-    print(my_robert.get_response("What equipment does this room offer?") + "\n\n")
+    #print(my_robert.get_response("Hi, who are you?") + "\n\n")
+    #print(my_robert.get_response("Can you help me?") + "\n\n")
+    #print(my_robert.get_response("I need to find a room") + "\n\n")
+    #print(my_robert.get_response("Room A13. Can you guide me there?") + "\n\n")
+    #print(my_robert.get_response("What equipment does this room offer?") + "\n\n")
 
 
     #res1 = my_robert.get_response("Hi, who are you?")
