@@ -57,13 +57,15 @@ test_models = [
 base_datasets_count = 1000
 
 
-def start_test_pipeline(model_name):
-    '''
-    Starts a test pipeline by testing the given robert models with
-    various prompts, dialogs and questions.
-    '''
-
+def test_instruction_following_capabilities(model_name):
+    '''Test a model for its instruction following capabilities'''
     # First step: calculate a rogue score. Use chatgpt datasets for that.
+    my_robert = robert(finetuned_path=build_finetuned_path(model_name))
+
+    db_name = "chatgpt"
+    if("gpt4all" in model_name):
+        db_name = "gpt4all"
+
     base_datasets = db.get_base_datasets("chatgpt", base_datasets_count)
     print("Going through " + str(base_datasets_count) + " datasets.")
     count = 1
@@ -95,12 +97,24 @@ def start_test_pipeline(model_name):
         sys.stdout.flush()
 
 
+def start_test_pipeline():
+    '''
+    Starts a test pipeline by testing the given robert models with
+    various prompts, dialogs and questions.
+    '''
+    # We go through each model and test them
+    for model in test_models:
+        if(model['test'] is False):
+            continue
+
+        test_instruction_following_capabilities(model['name'])
+
+
 if __name__ == "__main__":
     db.init()
     print("Database initiated.")
-    my_robert = robert()
 
-    start_test_pipeline("robert_10k")
+    start_test_pipeline()
     #preds = "My name is John"
     #target = "Is your name John"
     #rouge = ROUGEScore()
