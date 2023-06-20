@@ -97,6 +97,13 @@ class robert:
             f"### Instruction:\n{message['instruction']}\n\n### Response:"
         )
 
+    def clear_context(self):
+        context.clear()
+
+    def set_context(self, con):
+        self.clear_context()
+        self.context = con
+
     def get_response(self, message, use_context=True):
         '''Takes in a prompt and returns and answer from robert'''
         # We use the optional input field to store the existing chat
@@ -106,9 +113,9 @@ class robert:
             inp = '\n'.join(self.context[-2:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
-        #print("===================== PROMPT =====================")
-        #print(prompt)
-        #print("===================== END =====================\n")
+        print("===================== PROMPT =====================")
+        print(prompt)
+        print("===================== END =====================\n")
         encoded = self.tokenizer.encode(prompt, bos=True, eos=False, device=self.model.device)
 
         t0 = time.perf_counter()

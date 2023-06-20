@@ -56,14 +56,14 @@ test_models = [
     }
 ]
 base_datasets_count = 1000
+chat_datasets_count = 1000
 
 
-def test_instruction_following_capabilities(model_name):
+def test_instruction_following_capabilities(model_name, my_robert):
     '''Test a model for its instruction following capabilities'''
     # First step: calculate a rogue score. Use chatgpt datasets for that.
     print("\n")
     print("----- Testing instruction following capabilities of " + model_name)
-    my_robert = robert(finetuned_path=build_finetuned_path(model_name))
 
     db_name = "chatgpt"
     if("gpt4all" in model_name):
@@ -80,24 +80,33 @@ def test_instruction_following_capabilities(model_name):
         prediction = my_robert.get_response(data['instruction'], use_context=False)
         progress = "Done with " + str(round(100/base_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
-        entry = {
-            'model': model_name,
-            'rouge1_precision': json.dumps(score['rouge1_precision'].numpy().tolist()),
-            'rouge1_fmeasure': json.dumps(score['rouge1_fmeasure'].numpy().tolist()),
-            'rouge2_precision': json.dumps(score['rouge2_precision'].numpy().tolist()),
-            'rouge2_fmeasure': json.dumps(score['rouge2_fmeasure'].numpy().tolist()),
-            'rougeL_precision': json.dumps(score['rougeL_precision'].numpy().tolist()),
-            'rougeL_fmeasure': json.dumps(score['rougeL_fmeasure'].numpy().tolist()),
-            'rougeLsum_precision': json.dumps(score['rougeLsum_precision'].numpy().tolist()),
-            'rougeLsum_fmeasure': json.dumps(score['rougeLsum_fmeasure'].numpy().tolist()),
-            'instruction': data['instruction'],
-            'target': target,
-            'prediction': prediction
-        }
-        db.get_database()['rouge_scores'].insert_one(entry)
+        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction)
+
         count = count + 1
         sys.stdout.write('\r')
-        sys.stdout.write('ROUGE on ' + str(base_datasets_count) + ' datasets. ' + progress)
+        sys.stdout.write('Done with ' + str(base_datasets_count) + ' datasets. ' + progress)
+        sys.stdout.flush()
+
+
+def test_dialog_capabilities(model_name, my_robert):
+    print("\n")
+    print("----- Testing instruction following capabilities of " + model_name)
+
+    chat_datasets = db.get_chatting_datasets(chat_datasets_count, False)
+    print("Going through " + str(chat_datasets_count) + " datasets.")
+    count = 1
+    rouge = ROUGEScore()
+    for data in chat_datasets:
+        # For here, we want to work with the input as context.
+        target = data['output']
+        my_robert.set_context(data['input'].split('\n'))
+        prediction = my_robert.get_response(data['instruction'])
+        score = rouge(prediction, target)
+        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction)
+
+        count = count + 1
+        sys.stdout.write('\r')
+        sys.stdout.write('Done with ' + str(base_datasets_count) + ' datasets. ' + progress)
         sys.stdout.flush()
 
 
@@ -111,8 +120,10 @@ def start_test_pipeline():
     print("===================== Starting a new pipeline =====================")
     print("For that, we have " + str(len(to_test)) + " models to test.\n\n")
     for model in to_test:
+        my_robert = robert(finetuned_path=build_finetuned_path(model_name))
         print("Doing " + model['name'] + " now:")
-        test_instruction_following_capabilities(model['name'])
+        # test_instruction_following_capabilities(model['name'], my_robert)
+        test_dialog_capabilities(model['name'], my_robert)
 
         print("Done with " + model['name'] + "!\n")
 
@@ -122,7 +133,3 @@ if __name__ == "__main__":
     print("Database initiated.")
 
     start_test_pipeline()
-    #preds = "My name is John"
-    #target = "Is your name John"
-    #rouge = ROUGEScore()
-    #print(rouge(preds, target))
