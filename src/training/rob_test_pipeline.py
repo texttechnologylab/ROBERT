@@ -1,7 +1,8 @@
 from db import db
 from torchmetrics.text.rouge import ROUGEScore
-from ntlk.translate.bleu_score import sentence_bleu
+from nltk.translate.bleu_score import sentence_bleu
 import torch
+import time
 import sys
 import numpy as np
 import json
@@ -60,8 +61,8 @@ test_models = [
         'test': True
     }
 ]
-base_datasets_count = 1000
-chat_datasets_count = 1000
+base_datasets_count = 2
+chat_datasets_count = 2
 tries = 3
 done_models = []
 
@@ -92,9 +93,9 @@ def test_instruction_following_capabilities(model_name, my_robert):
                               target, prediction, data['input'], bleu_score)
 
         count = count + 1
-        sys.stdout.write('\r')
+        #sys.stdout.write('\r')
         sys.stdout.write('Done with ' + str(count) + ' datasets. ' + progress)
-        sys.stdout.flush()
+        #sys.stdout.flush()
 
 
 def test_dialog_capabilities(model_name, my_robert):
@@ -117,9 +118,10 @@ def test_dialog_capabilities(model_name, my_robert):
                               target, prediction, data['input'], bleu_score)
 
         count = count + 1
-        sys.stdout.write('\r')
+        # Decomment the two lines below if you dont want a new line in the console.
+        #sys.stdout.write('\r')
         sys.stdout.write('Done with ' + str(count) + ' datasets. ' + progress)
-        sys.stdout.flush()
+        #sys.stdout.flush()
 
 
 def start_test_pipeline():
