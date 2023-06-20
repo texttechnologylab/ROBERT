@@ -4,6 +4,8 @@ import sys
 import numpy as np
 import json
 import os
+from datetime import datetime
+
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../src/robert'))
 from src.robert.robert_lora import robert
@@ -118,15 +120,18 @@ def start_test_pipeline():
     '''
     # We go through each model and test them
     to_test = [m for m in test_models if m['test'] is True]
+    print(str(datetime.now()))
     print("===================== Starting a new pipeline =====================")
     print("For that, we have " + str(len(to_test)) + " models to test.\n\n")
     for model in to_test:
         my_robert = robert(finetuned_path=build_finetuned_path(model['name']))
         print("Doing " + model['name'] + " now:")
-        # test_instruction_following_capabilities(model['name'], my_robert)
+        test_instruction_following_capabilities(model['name'], my_robert)
         test_dialog_capabilities(model['name'], my_robert)
 
         print("Done with " + model['name'] + "!\n")
+    print(str(datetime.now()))
+    print("===================== Done with the pipeline =====================")
 
 
 if __name__ == "__main__":
