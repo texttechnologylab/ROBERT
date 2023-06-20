@@ -60,6 +60,8 @@ base_datasets_count = 1000
 def test_instruction_following_capabilities(model_name):
     '''Test a model for its instruction following capabilities'''
     # First step: calculate a rogue score. Use chatgpt datasets for that.
+    print("\n")
+    print("----- Testing instruction following capabilities of " + model_name)
     my_robert = robert(finetuned_path=build_finetuned_path(model_name))
 
     db_name = "chatgpt"
@@ -75,9 +77,10 @@ def test_instruction_following_capabilities(model_name):
     for data in base_datasets:
         target = data['output']
         prediction = my_robert.get_response(data['instruction'], use_context=False)
-        progress = "Done with " + str(100/base_datasets_count*count) + "%"
+        progress = "Done with " + str(round(100/base_datasets_count*count), 1) + "%"
         score = rouge(prediction, target)
         entry = {
+            'model': model_name,
             'rouge1_precision': json.dumps(score['rouge1_precision'].numpy().tolist()),
             'rouge1_fmeasure': json.dumps(score['rouge1_fmeasure'].numpy().tolist()),
             'rouge2_precision': json.dumps(score['rouge2_precision'].numpy().tolist()),
@@ -103,11 +106,14 @@ def start_test_pipeline():
     various prompts, dialogs and questions.
     '''
     # We go through each model and test them
-    for model in test_models:
-        if(model['test'] is False):
-            continue
-
+    to_test = [m for m in test_models if m['test'] is True]
+    print("===================== Starting a new pipeline =====================")
+    print("For that, we have " + len(to_test) + " models to test.\n\n")
+    for model in to_test:
+        print("Doing " + model['name'] + " now:")
         test_instruction_following_capabilities(model['name'])
+
+        print("Done with " + model['name'] + "!\n")
 
 
 if __name__ == "__main__":
