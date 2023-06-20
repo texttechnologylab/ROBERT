@@ -17,16 +17,22 @@ from lit_llama.lora import lora
 from lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
 # from scripts.prepare_alpaca import generate_prompt
 
+MODEL_NAME = "robert_10k"
 
 lora_r = 8
 lora_alpha = 16
 lora_dropout = 0.05
+robert_base_path = "/storage/projects/R.O.B.E.R.T/robert-models/[MODEL_NAME]/lit-llama-lora-finetuned.pth"
+
+
+def build_finetuned_path(model_name):
+    return robert_base_path.replace("[MODEL_NAME]", model_name)
 
 
 class robert:
 
     def __init__(self,
-                 finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_5k_chat_only/lit-llama-lora-finetuned.pth"),
+                 finetuned_path: Path = Path(build_finetuned_path(MODEL_NAME)),
                  pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
                  tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
                  quantize: Optional[str] = None,
@@ -122,13 +128,15 @@ class robert:
         # Sometimes the output contains a dialog prefix we dont want.
         if output.startswith("Rob:"):
             output = output[len("Rob:"):].strip()
+        elif output.startswith("Answer:"):
+            output = output[len("Answer:":).strip()]
         # Add the output to the context and also the prompt of the user
         self.context.append("Student: " + message)
         self.context.append("Rob: " + output)
         return output
 
 
-def test(finetuned_path: Path = Path("/storage/projects/R.O.B.E.R.T/robert-models/robert_10k/lit-llama-lora-finetuned.pth"),
+def test(finetuned_path: Path = Path(build_finetuned_path(MODEL_NAME)),
          pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
          tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
          quantize: Optional[str] = None,
