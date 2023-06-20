@@ -118,7 +118,7 @@ def start_test_pipeline():
     # We go through each model and test them
     to_test = [m for m in test_models if m['test'] is True]
     print("===================== Starting a new pipeline =====================")
-    print("For that, we have " + len(to_test) + " models to test.\n\n")
+    print("For that, we have " + str(len(to_test)) + " models to test.\n\n")
     for model in to_test:
         my_robert = robert(finetuned_path=build_finetuned_path(model_name))
         print("Doing " + model['name'] + " now:")
