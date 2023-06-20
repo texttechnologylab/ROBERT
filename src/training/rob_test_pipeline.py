@@ -1,9 +1,12 @@
 from db import db
 from torchmetrics.text.rouge import ROUGEScore
+from ntlk.translate.bleu_score import sentence_bleu
+import torch
 import sys
 import numpy as np
 import json
 import os
+import gc
 from datetime import datetime
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
@@ -19,7 +22,7 @@ test_models = [
     {
         'name': 'robert_1k',
         'desc': 'Trained on 1k base chatgpt ds',
-        'test': True
+        'test': False
     },
     {
         'name': 'robert_5k',
@@ -59,6 +62,8 @@ test_models = [
 ]
 base_datasets_count = 1000
 chat_datasets_count = 1000
+tries = 3
+done_models = []
 
 
 def test_instruction_following_capabilities(model_name, my_robert):
@@ -82,7 +87,9 @@ def test_instruction_following_capabilities(model_name, my_robert):
         prediction = my_robert.get_response(data['instruction'], use_context=False)
         progress = "Done with " + str(round(100/base_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
-        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction, data['input'])
+        bleu_score = float(sentence_bleu([target], prediction))
+        db.insert_rogue_score(score, model_name, data['instruction'],
+                              target, prediction, data['input'], bleu_score)
 
         count = count + 1
         sys.stdout.write('\r')
@@ -92,7 +99,7 @@ def test_instruction_following_capabilities(model_name, my_robert):
 
 def test_dialog_capabilities(model_name, my_robert):
     print("\n")
-    print("----- Testing instruction following capabilities of " + model_name)
+    print("----- Testing dialog capabilities of " + model_name)
 
     chat_datasets = db.get_chatting_datasets_with_input(chat_datasets_count, False)
     print("Going through " + str(chat_datasets_count) + " datasets.")
@@ -105,7 +112,9 @@ def test_dialog_capabilities(model_name, my_robert):
         prediction = my_robert.get_response(data['instruction'])
         progress = "Done with " + str(round(100/chat_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
-        db.insert_rogue_score(score, model_name, data['instruction'], target, prediction, data['input'])
+        bleu_score = float(sentence_bleu([target], prediction))
+        db.insert_rogue_score(score, model_name, data['instruction'],
+                              target, prediction, data['input'], bleu_score)
 
         count = count + 1
         sys.stdout.write('\r')
@@ -124,12 +133,33 @@ def start_test_pipeline():
     print("===================== Starting a new pipeline =====================")
     print("For that, we have " + str(len(to_test)) + " models to test.\n\n")
     for model in to_test:
-        my_robert = robert(finetuned_path=build_finetuned_path(model['name']))
-        print("Doing " + model['name'] + " now:")
-        test_instruction_following_capabilities(model['name'], my_robert)
-        test_dialog_capabilities(model['name'], my_robert)
+        try:
+            if(model['name'] in done_models):
+                continue
+            my_robert = robert(finetuned_path=build_finetuned_path(model['name']))
+            print("Doing " + model['name'] + " now:")
 
-        print("Done with " + model['name'] + "!\n")
+            test_instruction_following_capabilities(model['name'], my_robert)
+            test_dialog_capabilities(model['name'], my_robert)
+
+            print("Done with " + model['name'] + "!\n")
+            done_models.append(model['name'])
+            # Free the gpu from the model
+            my_robert = ""
+            gc.collect()
+            torch.cuda.empty_cache()
+            # I hope this gives pytorch enough time to free the memory. Otherwise, we crash here.
+            time.sleep(5)
+        except Exception as ex:
+            print("Caught en exception")
+            # We want to try again if an error occured because it could be just
+            # missing memory.
+            if(tries > 0):
+                print("Retrying again in 10 seconds.")
+                time.sleep(10)
+                tries = tries - 1
+                start_test_pipeline()
+
     print(str(datetime.now()))
     print("===================== Done with the pipeline =====================")
 

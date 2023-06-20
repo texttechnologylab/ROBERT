@@ -19,7 +19,7 @@ class db:
     def get_database(self):
         return self.client[self.cred['remote_database']]
 
-    def insert_rogue_score(self, score, model_name, inst, target, pred, inp):
+    def insert_rogue_score(self, score, model_name, inst, target, pred, inp, bleu):
         entry = {
             'model': model_name,
             'rouge1_precision': float(json.dumps(score['rouge1_precision'].numpy().tolist())),
@@ -30,6 +30,7 @@ class db:
             'rougeL_fmeasure': float(json.dumps(score['rougeL_fmeasure'].numpy().tolist())),
             'rougeLsum_precision': float(json.dumps(score['rougeLsum_precision'].numpy().tolist())),
             'rougeLsum_fmeasure': float(json.dumps(score['rougeLsum_fmeasure'].numpy().tolist())),
+            'bleu': bleu,
             'instruction': inst,
             'target': target,
             'prediction': pred,
