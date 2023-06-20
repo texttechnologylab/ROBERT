@@ -78,7 +78,7 @@ def test_instruction_following_capabilities(model_name):
     for data in base_datasets:
         target = data['output']
         prediction = my_robert.get_response(data['instruction'], use_context=False)
-        progress = "Done with " + str(round(100/base_datasets_count*count), 1) + "%"
+        progress = "Done with " + str(round(100/base_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
         entry = {
             'model': model_name,
@@ -109,7 +109,7 @@ def start_test_pipeline():
     # We go through each model and test them
     to_test = [m for m in test_models if m['test'] is True]
     print("===================== Starting a new pipeline =====================")
-    print("For that, we have " + len(to_test) + " models to test.\n\n")
+    print("For that, we have " + str(len(to_test)) + " models to test.\n\n")
     for model in to_test:
         print("Doing " + model['name'] + " now:")
         test_instruction_following_capabilities(model['name'])
