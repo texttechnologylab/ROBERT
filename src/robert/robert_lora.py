@@ -26,13 +26,13 @@ robert_base_path = "/storage/projects/R.O.B.E.R.T/robert-models/[MODEL_NAME]/lit
 
 
 def build_finetuned_path(model_name):
-    return robert_base_path.replace("[MODEL_NAME]", model_name)
+    return Path(robert_base_path.replace("[MODEL_NAME]", model_name))
 
 
 class robert:
 
     def __init__(self,
-                 finetuned_path: Path = Path(build_finetuned_path(MODEL_NAME)),
+                 finetuned_path: Path = build_finetuned_path(MODEL_NAME),
                  pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
                  tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
                  quantize: Optional[str] = None,
@@ -136,7 +136,7 @@ class robert:
         return output
 
 
-def test(finetuned_path: Path = Path(build_finetuned_path(MODEL_NAME)),
+def test(finetuned_path: Path = build_finetuned_path(MODEL_NAME),
          pretrained_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/7B/lit-llama.pth"),
          tokenizer_path: Path = Path("/storage/projects/R.O.B.E.R.T/lit-llama-weights/tokenizer.model"),
          quantize: Optional[str] = None,
