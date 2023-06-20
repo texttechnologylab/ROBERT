@@ -86,7 +86,7 @@ def test_instruction_following_capabilities(model_name, my_robert):
 
         count = count + 1
         sys.stdout.write('\r')
-        sys.stdout.write('Done with ' + str(base_datasets_count) + ' datasets. ' + progress)
+        sys.stdout.write('Done with ' + str(count) + ' datasets. ' + progress)
         sys.stdout.flush()
 
 
@@ -109,7 +109,7 @@ def test_dialog_capabilities(model_name, my_robert):
 
         count = count + 1
         sys.stdout.write('\r')
-        sys.stdout.write('Done with ' + str(base_datasets_count) + ' datasets. ' + progress)
+        sys.stdout.write('Done with ' + str(count) + ' datasets. ' + progress)
         sys.stdout.flush()
 
 
