@@ -47,6 +47,6 @@ class db:
         # again, make sure to sort so we get the same results again as before.
         if(include_paraphrased):
             return list(self.get_database()['test_datasets_chatting']
-                        .find().sort({"_id": 1}).limit(amount))
+                        .find().sort("_id", 1).limit(amount))
         return list(self.get_database()['test_datasets_chatting']
-                    .find({"p_model": {"$ne": "pegasus_paraphrase"}}).sort({"_id": 1}).limit(amount))
+                    .find({"p_model": {"$ne": "pegasus_paraphrase"}}).sort("_id", 1).limit(amount))

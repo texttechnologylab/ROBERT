@@ -101,6 +101,7 @@ def test_dialog_capabilities(model_name, my_robert):
         target = data['output']
         my_robert.set_context(data['input'].split('\n'))
         prediction = my_robert.get_response(data['instruction'])
+        progress = "Done with " + str(round(100/chat_datasets_count*count, 1)) + "%"
         score = rouge(prediction, target)
         db.insert_rogue_score(score, model_name, data['instruction'], target, prediction)
 
