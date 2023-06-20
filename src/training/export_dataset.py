@@ -25,13 +25,6 @@ def get_paraphrased_from(model, limit):
     return res
 
 
-def get_chatting_datasets(amount, include_paraphrased=True):
-    if(include_paraphrased):
-        return list(db.get_database()['test_datasets_chatting'].find().limit(amount))
-    return list(db.get_database()['test_datasets_chatting']
-                .find({"p_model": {"$ne": "pegasus_paraphrase"}}).limit(amount))
-
-
 if __name__ == "__main__":
     try:
         print("Initing db...")
@@ -63,7 +56,7 @@ if __name__ == "__main__":
         # Include dialogs if we want them
         if(include_dialogs):
             print("Adding the dialog datasets...")
-            for data in get_chatting_datasets(30000, include_paraphrased):
+            for data in db.get_chatting_datasets(30000, include_paraphrased):
                 datasets.append({
                     'instruction': data['instruction'],
                     'input': data['input'],
