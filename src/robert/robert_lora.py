@@ -129,7 +129,7 @@ class robert:
         if output.startswith("Rob:"):
             output = output[len("Rob:"):].strip()
         elif output.startswith("Answer:"):
-            output = output[len("Answer:":).strip()]
+            output = output[len("Answer:"):].strip()
         # Add the output to the context and also the prompt of the user
         self.context.append("Student: " + message)
         self.context.append("Rob: " + output)
