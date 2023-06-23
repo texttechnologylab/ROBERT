@@ -9,6 +9,8 @@ generate_new_data_for_paraphrasing = False
 train_chatting = True
 # Determines the absolute max amount of back and forth we want. 
 max_chatting_length = 6
+# Determine if we want to train a student. A student is basically a question bot.
+train_student = True
 
 from db import db
 import random
@@ -270,6 +272,11 @@ def generate_chat_sequence_test_data(params):
     print("Done with the dialogue.\n\n")
 
 
+def generate_student_testdata(params):
+    base_datasets = db.get_base_datasets("chatgpt", 24.000)
+    datasets = base_datasets.extend(db.get_base_datasets("gpt4all"), 60.000)
+
+
 def generate_test_data():
     print("Generating a new dataset.")
     # First read in our current environment parameters
@@ -283,6 +290,8 @@ def generate_test_data():
         try:
             if(train_chatting):
                 generate_chat_sequence_test_data(params)
+            elif(train_student):
+                generate_student_testdata(params)
             else:
                 generate_instruction_output_test_data(params)
             print("Done with item " + str(i))

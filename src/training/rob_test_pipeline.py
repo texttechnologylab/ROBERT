@@ -8,22 +8,26 @@ import numpy as np
 import json
 import os
 import gc
+import openai
 from datetime import datetime
+from chat_gpt3 import chat_gpt3
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../src/robert'))
-from src.robert.robert_lora import robert
-from src.robert.robert_lora import build_finetuned_path
+#from src.robert.robert_lora import robert
+#from src.robert.robert_lora import build_finetuned_path
 
 
 db = db()
+chatgpt_model = chat_gpt3()
+
 # Add here all models you want. Set the "test" property to false if
 # you dont want that model to be tested in the next run.
 test_models = [
     {
         'name': 'robert_1k',
         'desc': 'Trained on 1k base chatgpt ds',
-        'test': False
+        'test': True
     },
     {
         'name': 'robert_5k',
@@ -61,10 +65,12 @@ test_models = [
         'test': True
     }
 ]
-base_datasets_count = 2
-chat_datasets_count = 2
+base_datasets_count = 1000
+chat_datasets_count = 1000
 tries = 3
 done_models = []
+include_rouge = False
+include_chatgpt = True
 
 
 def test_instruction_following_capabilities(model_name, my_robert):
@@ -141,8 +147,9 @@ def start_test_pipeline():
             my_robert = robert(finetuned_path=build_finetuned_path(model['name']))
             print("Doing " + model['name'] + " now:")
 
-            test_instruction_following_capabilities(model['name'], my_robert)
-            test_dialog_capabilities(model['name'], my_robert)
+            if(include_rouge):
+                test_instruction_following_capabilities(model['name'], my_robert)
+                test_dialog_capabilities(model['name'], my_robert)
 
             print("Done with " + model['name'] + "!\n")
             done_models.append(model['name'])
@@ -166,8 +173,81 @@ def start_test_pipeline():
     print("===================== Done with the pipeline =====================")
 
 
+prompt_text = '''
+Rob knows the following:
+[CONTEXT]
+
+A student asked Rob, a virtual reality assistant:
+[QUESTION]
+
+Rob answered with:
+[ANSWER]
+
+Rob should only answer when he truly knows the answer. Otherwise he should excuse himself.
+Rate Robs answer with a number from 1 to 10. Rate harshly!
+Print only the number.'''
+
+
+dialog_prompt_text = '''
+A student is having a conversation with Rob, the virtual reality assistant. This is the chat history:
+[HISTORY]
+
+Rob knows the following:
+[CONTEXT]
+
+Rob continued the dialog with:
+[ANSWER]
+
+Rate Robs answer with a number from 1 to 10. Focus heavily on whether the answer has correct information given Robs knowledge! If the answer is false, give at max 3 points! If the answer is nonsensical give 1 point!
+Print only the number.
+'''
+
+
+def start_chatgpt_pipeline():
+    '''ChatGPT will give each answer a score.'''
+    scores = db.get_rouge_scores(99999)
+    count = 0
+    for score in scores:
+        test_model = [m for m in test_models if m['name'] == score['model']][0]
+        if(test_model['test'] is False):
+            print("Skipping for " + test_model['name'])
+            continue
+        answer = ''
+        if(score['inp'] == ''):
+            # time.sleep(0.5)
+            # This is an instruction following test
+            prompt = prompt_text.replace('[QUESTION]', score['instruction'])
+            prompt = prompt.replace('[CONTEXT]', "\n".join(score['context'].split('[ITEM]')))
+            prompt = prompt.replace('[ANSWER]', score['prediction'])
+            print(prompt)
+            answer = chatgpt_model.get_response(prompt).strip().replace("\n", "")
+        else:
+            # This is a dialog test
+            prompt = dialog_prompt_text.replace('[HISTORY]', score['inp'])
+            prompt = prompt.replace('[CONTEXT]', "\n".join(score['context'].split('[ITEM]')))
+            prompt = prompt.replace('[ANSWER]', score['prediction'])
+            print(prompt)
+            answer = chatgpt_model.get_response(prompt).strip().replace("\n", "")
+        try:
+            s = int(answer)
+            print("========================")
+            print("Score: " + str(s))
+            print("========================")
+            db.insert_chatgpt_score(s, score['model'], score['instruction'],
+                                    score['prediction'], score['inp'],
+                                    score['context'], score)
+        except Exception as ex:
+            print(ex)
+            print("Couldn't convert to int: " + answer)
+        count = count + 1
+        print("Done with " + str(count))
+
+
 if __name__ == "__main__":
     db.init()
     print("Database initiated.")
+    chatgpt_model.init(openai)
+    print("Chatgpt initiated.")
 
-    start_test_pipeline()
+    # start_test_pipeline()
+    start_chatgpt_pipeline()

@@ -19,6 +19,18 @@ class db:
     def get_database(self):
         return self.client[self.cred['remote_database']]
 
+    def insert_chatgpt_score(self, score, model_name, inst, output, inp, con, rouge_score):
+        entry = {
+          'score': score,
+          'instruction': inst,
+          'output': output,
+          'context': con,
+          'input': inp,
+          'model': model_name,
+          'rogue_score': rouge_score
+        }
+        self.get_database()['chatgpt_scores'].insert_one(entry)
+
     def insert_rogue_score(self, score, model_name, inst, target, pred, inp, bleu):
         entry = {
             'model': model_name,
@@ -44,6 +56,9 @@ class db:
             {"$match": {"p_model": {"$ne": "pegasus_paraphrase"}}},
             {"$limit": amount}
             ]))
+
+    def get_rouge_scores(self, amount):
+        return self.get_database()['rouge_scores'].find().sort("model", 1).limit(amount)
 
     def get_chatting_datasets_with_input(self, amount, include_paraphrased=True):
         datasets = self.get_chatting_datasets(99999999, include_paraphrased)
