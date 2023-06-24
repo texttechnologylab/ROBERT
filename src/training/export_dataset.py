@@ -36,11 +36,11 @@ if __name__ == "__main__":
 
         if(include_student):
             fetched = list(db.get_database()['test_datasets_chatgpt'].find())
-            fetched.extend(list(db.get_database()['test_datasets_gpt4all'].find()))
+            #fetched.extend(list(db.get_database()['test_datasets_gpt4all'].find()))
             print("Exporting " + str(len(fetched)) + " datasets")
             for data in fetched:
                 datasets.append({
-                    'instruction': "Formulate an instruction for Rob about the input",
+                    'instruction': "Formulate an instruction or a question towards Rob about the given input",
                     'input': "\n".join(data['context'].split('[ITEM]')),
                     'output': data['instruction'],
                 })
@@ -76,7 +76,7 @@ if __name__ == "__main__":
                     'output': data['output'],
                 })
             print("Done!")
-        with open('datasets/data_85k_para_student.json', 'w') as f:
+        with open('datasets/data_Xk_para_student.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:
