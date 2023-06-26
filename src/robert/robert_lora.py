@@ -90,7 +90,7 @@ class robert:
 
     def generate_prompt(self, message):
         if message["input"]:
-            if(is_student):
+            if(self.is_student):
                 return (
                     "Below is an instruction that describes a task, paired with an input that provides further context. "
                     "Write a response that appropriately completes the request.\n\n"
