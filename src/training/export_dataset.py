@@ -4,9 +4,10 @@ import sys
 from bson.objectid import ObjectId
 
 db = db()
-include_base = True
-include_paraphrased = True
-include_dialogs = True
+include_base = False
+include_paraphrased = False
+include_dialogs = False
+include_student = True
 model_name = "chatgpt"
 
 
@@ -32,6 +33,18 @@ if __name__ == "__main__":
         print("Done!\nExporting the datasets...")
         datasets = []
         total_base = 10000
+
+        if(include_student):
+            fetched = list(db.get_database()['test_datasets_chatgpt'].find())
+            #fetched.extend(list(db.get_database()['test_datasets_gpt4all'].find()))
+            print("Exporting " + str(len(fetched)) + " datasets")
+            for data in fetched:
+                datasets.append({
+                    'instruction': "Formulate an instruction or a question towards Rob about the given input",
+                    'input': "\n".join(data['context'].split('[ITEM]')),
+                    'output': data['instruction'],
+                })
+            print("Student done")
 
         if(include_base):
             for data in db.get_base_datasets(model_name, total_base):
@@ -63,7 +76,7 @@ if __name__ == "__main__":
                     'output': data['output'],
                 })
             print("Done!")
-        with open('datasets/data_45k_chat_para_robert.json', 'w') as f:
+        with open('datasets/data_Xk_para_student.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:

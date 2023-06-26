@@ -2,6 +2,7 @@ pymongo
 torchmetrics
 openai
 transformers
+nltk
 sentencepiece
 torch
 gpt4all

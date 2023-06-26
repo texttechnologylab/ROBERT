@@ -39,7 +39,9 @@ class robert:
                  dtype: str = "float32",
                  max_new_tokens: int = 100,
                  top_k: int = 200,
-                 temperature: float = 0.8):
+                 temperature: float = 0.8,
+                 is_student=False,
+                 context_amount=2):
         '''Inits Robert'''
         # In the init, we want to load the model.
         assert finetuned_path.is_file()
@@ -50,6 +52,8 @@ class robert:
         self.top_k = top_k
         self.temperature = temperature
         self.context = []
+        self.is_student = is_student
+        self.context_amount = context_amount
 
         if quantize is not None:
             raise NotImplementedError("Quantization in LoRA is not supported yet")
@@ -86,11 +90,18 @@ class robert:
 
     def generate_prompt(self, message):
         if message["input"]:
-            return (
-                "Below is an instruction that describes a task, paired with an input that provides further context. "
-                "Write a response that appropriately continues the inputs by only one more line. Ask questions as well.\n\n"
-                f"### Instruction:\n{message['instruction']}\n\n### Input:\nDialog so far:\n{message['input']}\n\n### Response:"
-            )
+            if(self.is_student):
+                return (
+                    "Below is an instruction that describes a task, paired with an input that provides further context. "
+                    "Write a response that appropriately completes the request.\n\n"
+                    f"### Instruction:\n{example['instruction']}\n\n### Input:\n{example['input']}\n\n### Response:"
+                )
+            else:
+                return (
+                    "Below is an instruction that describes a task, paired with an input that provides further context. "
+                    "Write a response that appropriately continues the inputs by only one more line. Ask questions as well.\n\n"
+                    f"### Instruction:\n{message['instruction']}\n\n### Input:\nDialog so far:\n{message['input']}\n\n### Response:"
+                )
         return (
             "Below is an instruction that describes a task. "
             "Write a response that appropriately completes the request.\n\n"
@@ -110,7 +121,7 @@ class robert:
         # and context. We take the last X entries to the context.
         inp = ""
         if(use_context):
-            inp = '\n'.join(self.context[-2:])
+            inp = '\n'.join(self.context[-self.context_amount:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
         # print("===================== PROMPT =====================")
@@ -150,7 +161,9 @@ def test(finetuned_path: Path = build_finetuned_path(MODEL_NAME),
          dtype: str = "float32",
          max_new_tokens: int = 100,
          top_k: int = 200,
-         temperature: float = 0.8):
+         temperature: float = 0.8,
+         is_student=False,
+         context_amount=2):
     my_robert = robert(finetuned_path,
                        pretrained_path,
                        tokenizer_path,
