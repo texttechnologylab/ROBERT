@@ -17,7 +17,7 @@ from lit_llama.lora import lora
 from lit_llama.utils import EmptyInitOnDevice, lazy_load, llama_model_lookup
 # from scripts.prepare_alpaca import generate_prompt
 
-MODEL_NAME = "robert_10k"
+MODEL_NAME = "robert_1k"
 
 lora_r = 8
 lora_alpha = 16
@@ -160,11 +160,11 @@ def test(finetuned_path: Path = build_finetuned_path(MODEL_NAME),
                        top_k,
                        temperature)
 
-    print(my_robert.get_response("Hi, how are you?", False) + "\n\n")
-    print(my_robert.get_response("I'm confused. Where are we?", False) + "\n\n")
-    print(my_robert.get_response("Tell me something about this place.", False) + "\n\n")
-    print(my_robert.get_response("Could you tell me more?", False) + "\n\n")
-    print(my_robert.get_response("Is there someone I could talk to?", False) + "\n\n")
+    print(my_robert.get_response("Hi, how are you?", True) + "\n\n")
+    print(my_robert.get_response("I'm confused. Where are we?", True) + "\n\n")
+    print(my_robert.get_response("Tell me something about this place.", True) + "\n\n")
+    print(my_robert.get_response("Could you tell me more?", True) + "\n\n")
+    print(my_robert.get_response("Is there someone I could talk to?", True) + "\n\n")
     
     #print(my_robert.get_response("Hi, who are you?", False) + "\n\n")
     #print(my_robert.get_response("Can you help me?", False) + "\n\n")
