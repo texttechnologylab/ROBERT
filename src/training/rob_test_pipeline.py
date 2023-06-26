@@ -28,22 +28,22 @@ test_models = [
     {
         'name': 'robert_5k',
         'desc': 'Trained on 5k base chatgpt ds',
-        'test': True
+        'test': False
     },
     {
         'name': 'robert_5k_chat_only',
         'desc': 'Trained on 5k chatting chatgpt ds',
-        'test': True
+        'test': False
     },
     {
         'name': 'robert_21k_chat_only_para',
         'desc': 'Trained on 5k chatting chatgpt ds + 16k chatting paraphrased',
-        'test': True
+        'test': False
     },
     {
         'name': 'robert_6k_para_chat',
         'desc': 'Trained on 6k base chatgpt ds + 12k paraphrased + 5k chatting ds',
-        'test': True
+        'test': False
     },
     {
         'name': 'robert_10k_gpt4all',
@@ -61,8 +61,8 @@ test_models = [
         'test': True
     }
 ]
-base_datasets_count = 2
-chat_datasets_count = 2
+base_datasets_count = 1000
+chat_datasets_count = 1000
 tries = 3
 done_models = []
 
