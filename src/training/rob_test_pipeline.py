@@ -3,6 +3,7 @@ from torchmetrics.text.rouge import ROUGEScore
 from nltk.translate.bleu_score import sentence_bleu
 import torch
 import time
+import random
 import sys
 import numpy as np
 import json
@@ -257,7 +258,7 @@ def start_student_instruction_generation():
     '''Creates X amount of new instructions by a student for robert'''
     params = get_parameters()
     my_student = robert(finetuned_path=build_finetuned_path("student_24k_para"),
-                        is_student=True, context_amount=4)
+                        is_student=True, context_amount=4, dtype="bfloat16")
     for i in range(1000):
         context = random.sample(params, random.randint(1, 3))
         my_student.set_context(context)

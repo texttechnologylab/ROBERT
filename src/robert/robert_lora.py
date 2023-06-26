@@ -94,7 +94,7 @@ class robert:
                 return (
                     "Below is an instruction that describes a task, paired with an input that provides further context. "
                     "Write a response that appropriately completes the request.\n\n"
-                    f"### Instruction:\n{example['instruction']}\n\n### Input:\n{example['input']}\n\n### Response:"
+                    f"### Instruction:\n{message['instruction']}\n\n### Input:\n{message['input']}\n\n### Response:"
                 )
             else:
                 return (
@@ -124,9 +124,9 @@ class robert:
             inp = '\n'.join(self.context[-self.context_amount:])
         sample = {"instruction": message, "input": inp}
         prompt = self.generate_prompt(sample)
-        # print("===================== PROMPT =====================")
-        # print(prompt)
-        # print("===================== END =====================\n")
+        print("===================== PROMPT =====================")
+        print(prompt)
+        print("===================== END =====================\n")
         encoded = self.tokenizer.encode(prompt, bos=True, eos=False, device=self.model.device)
 
         t0 = time.perf_counter()
