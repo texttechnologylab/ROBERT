@@ -70,7 +70,17 @@ chat_datasets_count = 1000
 tries = 3
 done_models = []
 include_rouge = False
-include_chatgpt = True
+include_chatgpt = False
+generate_student_instructions = True
+student_instruction = """Formulate an instruction or a question towards Rob about the given input"""
+
+
+def get_parameters():
+    params = []
+    f = open("parameters.txt", "r", encoding='utf-8')
+    for line in f.readlines():
+        params.append(str(line.strip()))
+    return params
 
 
 def test_instruction_following_capabilities(model_name, my_robert):
@@ -243,6 +253,25 @@ def start_chatgpt_pipeline():
         print("Done with " + str(count))
 
 
+def start_student_instruction_generation():
+    '''Creates X amount of new instructions by a student for robert'''
+    params = get_parameters()
+    my_student = robert(finetuned_path=build_finetuned_path("student_24k_para"),
+                        is_student=True, context_amount=4)
+    for i in range(1000):
+        context = random.sample(params, random.randint(1, 3))
+        my_student.set_context(context)
+        # The response of the student model is an instruction for Rob
+        answer = my_student.get_response(student_instruction)
+        dataset = {
+            "instruction": student_instruction,
+            "output": answer,
+            "context": "[ITEM]".join(context),
+            "model": "student_24k_para"
+        }
+        db.get_database()['student_instructions'].insert_one(dataset)
+
+
 if __name__ == "__main__":
     db.init()
     print("Database initiated.")
@@ -250,4 +279,6 @@ if __name__ == "__main__":
     print("Chatgpt initiated.")
 
     # start_test_pipeline()
-    start_chatgpt_pipeline()
+    # start_chatgpt_pipeline()
+    if(generate_student_instructions):
+        start_student_instruction_generation()
