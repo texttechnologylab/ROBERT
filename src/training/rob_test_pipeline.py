@@ -209,6 +209,7 @@ def start_test_pipeline():
             time.sleep(5)
         except Exception as ex:
             print("Caught en exception")
+            print(ex)
             # We want to try again if an error occured because it could be just
             # missing memory.
             if(tries > 0):
