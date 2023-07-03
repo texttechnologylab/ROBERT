@@ -50,6 +50,9 @@ class db:
         }
         self.get_database()['rouge_scores'].insert_one(entry)
 
+    def get_student_instructions(self, amount):
+        return list(self.get_database())['student_instructions'].find().sort("_id", 1).limt(amount)
+
     def get_base_datasets(self, model, amount):
         return list(self.get_database()['test_datasets_' + model].aggregate([
             {"$sort": {'_id': 1}},  # Make sure we always get the same results!

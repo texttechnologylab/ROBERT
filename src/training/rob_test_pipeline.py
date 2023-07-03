@@ -33,22 +33,22 @@ test_models = [
     {
         'name': 'robert_5k',
         'desc': 'Trained on 5k base chatgpt ds',
-        'test': False
+        'test': True
     },
     {
         'name': 'robert_5k_chat_only',
         'desc': 'Trained on 5k chatting chatgpt ds',
-        'test': False
+        'test': True
     },
     {
         'name': 'robert_21k_chat_only_para',
         'desc': 'Trained on 5k chatting chatgpt ds + 16k chatting paraphrased',
-        'test': False
+        'test': True
     },
     {
         'name': 'robert_6k_para_chat',
         'desc': 'Trained on 6k base chatgpt ds + 12k paraphrased + 5k chatting ds',
-        'test': False
+        'test': True
     },
     {
         'name': 'robert_10k_gpt4all',
@@ -68,11 +68,11 @@ test_models = [
 ]
 base_datasets_count = 1000
 chat_datasets_count = 1000
-tries = 3
 done_models = []
 include_rouge = False
 include_chatgpt = False
-generate_student_instructions = True
+generate_rateable_datasets = True
+generate_student_instructions = False
 student_instruction = """Formulate an instruction or a question towards Rob about the given input"""
 
 
@@ -136,9 +136,43 @@ def test_dialog_capabilities(model_name, my_robert):
 
         count = count + 1
         # Decomment the two lines below if you dont want a new line in the console.
-        #sys.stdout.write('\r')
+        # sys.stdout.write('\r')
         sys.stdout.write('Done with ' + str(count) + ' datasets. ' + progress)
-        #sys.stdout.flush()
+        # sys.stdout.flush()
+
+
+def build_rateable_dataset(model_name, my_robert):
+    print("\n")
+    print("----- Building rateable datasets for " + model_name)
+
+    # First, the instructions.
+    student_instructions = db.get_student_instructions(9999, False)
+    print("Going through " + str(chat_datasets_count) + " datasets.")
+    count = 1
+    for data in chat_datasets:
+        # For here, we want to work with the input as context.
+        my_robert.clear_context()
+        # the output of a student instruction dataset is a question for Rob
+        robs_answer = my_robert.get_response(data['output'])
+
+        dataset = {
+            'instruction': data['output'],
+            'output': robs_answer,
+            'input': '',
+            'context': data['context'],
+            'model': model_name,
+            'type': 'instruction',
+            'rating': 0,
+            'comment': '',
+            "isRated": False
+        }
+        db.get_database()['rateable_test_datasets'].insert_one(dataset)
+        count = count + 1
+        # Decomment the two lines below if you dont want a new line in the console.
+        sys.stdout.write('Done with ' + str(count) + ' datasets. ')
+
+    # TODO: Do dialogs as well here!
+    pass
 
 
 def start_test_pipeline():
@@ -147,6 +181,7 @@ def start_test_pipeline():
     various prompts, dialogs and questions.
     '''
     # We go through each model and test them
+    tries = 3
     to_test = [m for m in test_models if m['test'] is True]
     print(str(datetime.now()))
     print("===================== Starting a new pipeline =====================")
@@ -161,6 +196,8 @@ def start_test_pipeline():
             if(include_rouge):
                 test_instruction_following_capabilities(model['name'], my_robert)
                 test_dialog_capabilities(model['name'], my_robert)
+            if(generate_rateable_datasets):
+                build_rateable_dataset(model['name'], my_robert)
 
             print("Done with " + model['name'] + "!\n")
             done_models.append(model['name'])
@@ -279,7 +316,7 @@ if __name__ == "__main__":
     chatgpt_model.init(openai)
     print("Chatgpt initiated.")
 
-    # start_test_pipeline()
+    start_test_pipeline()
     # start_chatgpt_pipeline()
     if(generate_student_instructions):
         start_student_instruction_generation()
