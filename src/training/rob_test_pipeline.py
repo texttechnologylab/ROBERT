@@ -260,7 +260,7 @@ def start_student_instruction_generation():
     my_student = robert(finetuned_path=build_finetuned_path("student_24k_para"),
                         is_student=True, context_amount=4)
     for i in range(100):
-        context = random.sample(params, random.randint(1, 3))
+        context = random.sample(params, random.randint(1, 2))
         my_student.set_context(context)
         # The response of the student model is an instruction for Rob
         answer = my_student.get_response(student_instruction)
