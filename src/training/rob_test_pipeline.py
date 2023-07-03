@@ -146,8 +146,8 @@ def build_rateable_dataset(model_name, my_robert):
     print("----- Building rateable datasets for " + model_name)
 
     # First, the instructions.
-    student_instructions = db.get_student_instructions(9999, False)
-    print("Going through " + str(chat_datasets_count) + " datasets.")
+    student_instructions = db.get_student_instructions(9999)
+    print("Going through " + str(len(student_instructions)) + " datasets.")
     count = 1
     for data in chat_datasets:
         # For here, we want to work with the input as context.
