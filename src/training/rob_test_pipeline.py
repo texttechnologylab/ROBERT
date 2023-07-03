@@ -149,7 +149,7 @@ def build_rateable_dataset(model_name, my_robert):
     student_instructions = db.get_student_instructions(9999)
     print("Going through " + str(len(student_instructions)) + " datasets.")
     count = 1
-    for data in chat_datasets:
+    for data in student_instructions:
         # For here, we want to work with the input as context.
         my_robert.clear_context()
         # the output of a student instruction dataset is a question for Rob
