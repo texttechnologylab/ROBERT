@@ -7,7 +7,8 @@ db = db()
 include_base = False
 include_paraphrased = False
 include_dialogs = False
-include_student = True
+include_student_instruction_following = False
+include_student_chatting = True
 model_name = "chatgpt"
 
 
@@ -34,7 +35,7 @@ if __name__ == "__main__":
         datasets = []
         total_base = 10000
 
-        if(include_student):
+        if(include_student_instruction_following):
             fetched = list(db.get_database()['test_datasets_chatgpt'].find())
             #fetched.extend(list(db.get_database()['test_datasets_gpt4all'].find()))
             print("Exporting " + str(len(fetched)) + " datasets")
@@ -44,7 +45,32 @@ if __name__ == "__main__":
                     'input': "\n".join(data['context'].split('[ITEM]')),
                     'output': data['instruction'],
                 })
-            print("Student done")
+            print("Student instruction done")
+
+        if(include_student_chatting):
+            fetched = list(db.get_database()['test_datasets_chatting'].find())
+            instruction = "Proactively continue the dialog provided in the input as the student"
+            print("Exporting " + str(len(fetched)) + " datasets")
+
+            for data in fetched:
+                # We have to handle start of dialog differently then others
+                if(data['input'] == '' or data['input'].count('\n') == 0):
+                    datasets.append({
+                        'instruction': instruction,
+                        'input': '',
+                        'output': data['instruction'].replace('Student: ', ''),
+                    })
+                else:
+                    history = data['input'].split('\n')
+                    if(history[len(history) - 1].startswith('Student:')):
+                        history = history[:-1]
+                    datasets.append({
+                        'instruction': instruction,
+                        # The last input turn is a student again. We dont want that.
+                        'input': "\n".join(history),
+                        'output': data['instruction'].replace('Student: ', ''),
+                    })
+            print("Student chatting done")
 
         if(include_base):
             for data in db.get_base_datasets(model_name, total_base):
@@ -76,7 +102,7 @@ if __name__ == "__main__":
                     'output': data['output'],
                 })
             print("Done!")
-        with open('datasets/data_Xk_para_student.json', 'w') as f:
+        with open('datasets/data_22k_student_chat_para.json', 'w') as f:
             json.dump(datasets, f)
         print("Done exporting.")
     except Exception as e:
