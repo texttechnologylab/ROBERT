@@ -320,7 +320,7 @@ def start_student_dialog_generation():
     for i in range(100):
         # context here is the chat history. We have none for now.
         history = []
-        my_student.set_context(history)
+        my_student.set_context([])
         # The response of the student model is an instruction for Rob
         answer = my_student.get_response(student_dialog)
         history.append("Student: " + answer)
