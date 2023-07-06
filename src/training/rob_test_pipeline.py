@@ -71,8 +71,9 @@ chat_datasets_count = 1000
 done_models = []
 include_rouge = False
 include_chatgpt = False
-generate_rateable_datasets = True
+generate_rateable_datasets = False
 generate_student_instructions = False
+generate_student_dialogs = True
 student_instruction = """Formulate an instruction or a question towards Rob about the given input"""
 student_dialog = """Proactively continue the dialog provided in the input as the student"""
 
@@ -337,7 +338,9 @@ if __name__ == "__main__":
     chatgpt_model.init(openai)
     print("Chatgpt initiated.")
 
-    start_test_pipeline()
+    # start_test_pipeline()
     # start_chatgpt_pipeline()
     if(generate_student_instructions):
         start_student_instruction_generation()
+    if(generate_student_dialogs):
+        start_student_dialog_generation()
