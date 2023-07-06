@@ -348,12 +348,12 @@ def continue_student_dialog_generation():
     if(last_turn == "Student"):
         print("Initing Robert as our model")
         my_model = robert(finetuned_path=build_finetuned_path("robert_21k_chat_only_para"),
-                          context_amount=4, dtype="bfloat16")
+                          context_amount=2, dtype="bfloat16")
         speaker = "Rob"
     else:
         print("Initing the student as our model")
         my_model = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
-                          is_student=True, context_amount=4, dtype="bfloat16")
+                          is_student=True, context_amount=2, dtype="bfloat16")
         speaker = "Student"
     # Now through each dialog, continue it.
     for dialog in dialogs:
@@ -379,7 +379,7 @@ def continue_student_dialog_generation():
             "context": "\n".join(history),
             "model": "robert_21k_chat_only_para/student_22k_chat_para",
             "last_turn": speaker,
-            "context_size": 4,
+            "context_size": 2,
             "turns": turn + 1
         }
         db.get_database()['student_dialogs'].insert_one(dataset)
