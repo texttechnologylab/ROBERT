@@ -387,4 +387,5 @@ if __name__ == "__main__":
     if(generate_student_instructions):
         start_student_instruction_generation()
     if(generate_student_dialogs):
-        start_student_dialog_generation()
+        # start_student_dialog_generation()
+        continue_student_dialog_generation()
