@@ -328,7 +328,50 @@ def start_student_dialog_generation():
             "instruction": student_dialog,
             "output": answer,
             "context": "\n".join(history),
-            "model": "student_22k_chat_para"
+            "model": "student_22k_chat_para",
+            "last_turn": "student",
+            "turns": 1
+        }
+        db.get_database()['student_dialogs'].insert_one(dataset)
+
+
+def continue_student_dialog_generation():
+    turn = 1
+    dialogs = db.get_student_dialogs_by_turn(9999, turn)
+    print("Found " + str(len(dialogs)) + " dialogs of turn " + str(turn))
+    last_turn = dialogs[0].last_turn
+    print("Last turn was: " + str(last_turn))
+    my_model = ''
+    if(last_turn == "student"):
+        my_model = robert(finetuned_path=build_finetuned_path("robert_21k_chat_only_para"),
+                          context_amount=4, dtype="bfloat16")
+    else:
+        my_model = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
+                          is_student=True, context_amount=4, dtype="bfloat16")
+    # Now through each dialog, continue it.
+    for dialog in dialogs:
+        history = dialog['context'].split('\n')
+        # If we have a history, then pass in the chat history
+        # Robert doesnt take the last instruction into the context
+        if(last_turn == "student"):
+            my_model.set_context(dialog['context'].split('\n')[:-1])
+        else:
+            my_model.set_context(dialog['context'].split('\n'))
+
+        # The student gets the default prompt
+        prompt = student_dialog
+        # Rob gets the last question of the student as the input
+        if(last_turn == "rob"):
+            prompt = dialog["output"]
+
+        answer = my_model.get_response(prompt)
+        dataset = {
+            "instruction": prompt,
+            "output": answer,
+            "context": "\n".join(history),
+            "model": "robert_21k_chat_only_para/student_22k_chat_para",
+            "last_turn": "student" if last_turn == "student" else "rob",
+            "turns": turn + 1
         }
         db.get_database()['student_dialogs'].insert_one(dataset)
 
