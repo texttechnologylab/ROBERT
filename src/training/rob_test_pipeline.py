@@ -316,17 +316,18 @@ def start_student_instruction_generation():
 def start_student_dialog_generation():
     '''Creates X amount of new instructions by a student for robert'''
     my_student = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
-                        is_student=True, context_amount=4)
+                        is_student=True, context_amount=4, dtype="bfloat16")
     for i in range(100):
         # context here is the chat history. We have none for now.
-        context = ""
-        my_student.set_context([context])
+        context = [""]
+        my_student.set_context(context)
         # The response of the student model is an instruction for Rob
         answer = my_student.get_response(student_dialog)
+        context.append("Student: " + answer)
         dataset = {
             "instruction": student_dialog,
             "output": answer,
-            "context": context,
+            "context": "\n".join(context),
             "model": "student_22k_chat_para"
         }
         db.get_database()['student_dialogs'].insert_one(dataset)
