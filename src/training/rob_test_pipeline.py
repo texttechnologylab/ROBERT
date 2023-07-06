@@ -317,7 +317,7 @@ def start_student_dialog_generation():
     '''Creates X amount of new instructions by a student for robert'''
     my_student = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
                         is_student=True, context_amount=4, dtype="bfloat16")
-    for i in range(100):
+    for i in range(250):
         # context here is the chat history. We have none for now.
         history = []
         my_student.set_context([])
