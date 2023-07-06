@@ -343,7 +343,7 @@ def continue_student_dialog_generation():
     print("Last turn was: " + str(last_turn))
     my_model = ''
     speaker = ''
-    if(last_turn == "student"):
+    if(last_turn == "Student"):
         print("Initing Robert as our model")
         my_model = robert(finetuned_path=build_finetuned_path("robert_21k_chat_only_para"),
                           context_amount=4, dtype="bfloat16")
@@ -358,7 +358,7 @@ def continue_student_dialog_generation():
         history = dialog['context'].split('\n')
         # If we have a history, then pass in the chat history
         # Robert doesnt take the last instruction into the context
-        if(last_turn == "student"):
+        if(last_turn == "Student"):
             my_model.set_context(dialog['context'].split('\n')[:-1])
         else:
             my_model.set_context(dialog['context'].split('\n'))
@@ -366,7 +366,7 @@ def continue_student_dialog_generation():
         # The student gets the default prompt
         prompt = student_dialog
         # Rob gets the last question of the student as the input
-        if(last_turn == "student"):
+        if(last_turn == "Student"):
             prompt = dialog["output"]
 
         answer = my_model.get_response(prompt)
