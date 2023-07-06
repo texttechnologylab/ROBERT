@@ -343,9 +343,11 @@ def continue_student_dialog_generation():
     print("Last turn was: " + str(last_turn))
     my_model = ''
     if(last_turn == "student"):
+        print("Initing Robert as our model")
         my_model = robert(finetuned_path=build_finetuned_path("robert_21k_chat_only_para"),
                           context_amount=4, dtype="bfloat16")
     else:
+        print("Initing the student as our model")
         my_model = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
                           is_student=True, context_amount=4, dtype="bfloat16")
     # Now through each dialog, continue it.
