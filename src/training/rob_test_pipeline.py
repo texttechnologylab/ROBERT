@@ -219,7 +219,7 @@ def start_test_pipeline():
             if(model['name'] in done_models):
                 continue
             my_robert = robert(finetuned_path=build_finetuned_path(model['name']),
-                               context_amount=4)
+                               context_amount=4, dtype="bfloat16")
             print("Doing " + model['name'] + " now:")
 
             if(include_rouge):
