@@ -319,8 +319,8 @@ def start_student_dialog_generation():
                         is_student=True, context_amount=4)
     for i in range(100):
         # context here is the chat history. We have none for now.
-        context = [""]
-        my_student.set_context(context)
+        context = ""
+        my_student.set_context([context])
         # The response of the student model is an instruction for Rob
         answer = my_student.get_response(student_dialog)
         dataset = {
