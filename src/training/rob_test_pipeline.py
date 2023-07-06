@@ -218,7 +218,8 @@ def start_test_pipeline():
         try:
             if(model['name'] in done_models):
                 continue
-            my_robert = robert(finetuned_path=build_finetuned_path(model['name']))
+            my_robert = robert(finetuned_path=build_finetuned_path(model['name']),
+                               context_amount=4)
             print("Doing " + model['name'] + " now:")
 
             if(include_rouge):
@@ -417,7 +418,7 @@ if __name__ == "__main__":
     chatgpt_model.init(openai)
     print("Chatgpt initiated.")
 
-    # start_test_pipeline()
+    start_test_pipeline()
     # start_chatgpt_pipeline()
     if(generate_student_instructions):
         start_student_instruction_generation()
