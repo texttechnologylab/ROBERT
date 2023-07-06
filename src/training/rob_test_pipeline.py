@@ -363,7 +363,7 @@ def continue_student_dialog_generation():
         # The student gets the default prompt
         prompt = student_dialog
         # Rob gets the last question of the student as the input
-        if(last_turn == "rob"):
+        if(last_turn == "student"):
             prompt = dialog["output"]
 
         answer = my_model.get_response(prompt)
