@@ -319,15 +319,15 @@ def start_student_dialog_generation():
                         is_student=True, context_amount=4, dtype="bfloat16")
     for i in range(100):
         # context here is the chat history. We have none for now.
-        context = []
-        my_student.set_context(context)
+        history = []
+        my_student.set_context(history)
         # The response of the student model is an instruction for Rob
         answer = my_student.get_response(student_dialog)
-        context.append("Student: " + answer)
+        history.append("Student: " + answer)
         dataset = {
             "instruction": student_dialog,
             "output": answer,
-            "context": "\n".join(context),
+            "context": "\n".join(history),
             "model": "student_22k_chat_para"
         }
         db.get_database()['student_dialogs'].insert_one(dataset)
