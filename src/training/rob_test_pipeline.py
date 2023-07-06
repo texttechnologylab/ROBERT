@@ -338,7 +338,7 @@ def start_student_dialog_generation():
 
 
 def continue_student_dialog_generation():
-    turn = 3
+    turn = 1
     dialogs = db.get_student_dialogs_by_turn(9999, turn)
     print("Found " + str(len(dialogs)) + " dialogs of turn " + str(turn))
     last_turn = dialogs[0]["last_turn"]
@@ -347,12 +347,12 @@ def continue_student_dialog_generation():
     speaker = ''
     if(last_turn == "Student"):
         print("Initing Robert as our model")
-        my_model = robert(finetuned_path=build_finetuned_path("robert_21k_chat_only_para"),
+        my_model = robert(finetuned_path=build_finetuned_path("robert_10k"),
                           context_amount=4, dtype="bfloat16")
         speaker = "Rob"
     else:
         print("Initing the student as our model")
-        my_model = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
+        my_model = robert(finetuned_path=build_finetuned_path("robert_10k"),
                           is_student=True, context_amount=4, dtype="bfloat16")
         speaker = "Student"
     # Now through each dialog, continue it.
@@ -395,5 +395,5 @@ if __name__ == "__main__":
     if(generate_student_instructions):
         start_student_instruction_generation()
     if(generate_student_dialogs):
-        start_student_dialog_generation()
-        #continue_student_dialog_generation()
+        # start_student_dialog_generation()
+        continue_student_dialog_generation()
