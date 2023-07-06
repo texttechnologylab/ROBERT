@@ -74,6 +74,7 @@ include_chatgpt = False
 generate_rateable_datasets = True
 generate_student_instructions = False
 student_instruction = """Formulate an instruction or a question towards Rob about the given input"""
+student_dialog = """Proactively continue the dialog provided in the input as the student"""
 
 
 def get_parameters():
@@ -309,6 +310,25 @@ def start_student_instruction_generation():
             "model": "student_24k_para"
         }
         db.get_database()['student_instructions'].insert_one(dataset)
+
+
+def start_student_dialog_generation():
+    '''Creates X amount of new instructions by a student for robert'''
+    my_student = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
+                        is_student=True, context_amount=4)
+    for i in range(100):
+        # context here is the chat history. We have none for now.
+        context = ""
+        my_student.set_context(context)
+        # The response of the student model is an instruction for Rob
+        answer = my_student.get_response(student_dialog)
+        dataset = {
+            "instruction": student_dialog,
+            "output": answer,
+            "context": context,
+            "model": "student_22k_chat_para"
+        }
+        db.get_database()['student_dialogs'].insert_one(dataset)
 
 
 if __name__ == "__main__":

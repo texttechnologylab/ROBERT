@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
         if(include_student_instruction_following):
             fetched = list(db.get_database()['test_datasets_chatgpt'].find())
-            #fetched.extend(list(db.get_database()['test_datasets_gpt4all'].find()))
+            # fetched.extend(list(db.get_database()['test_datasets_gpt4all'].find()))
             print("Exporting " + str(len(fetched)) + " datasets")
             for data in fetched:
                 datasets.append({
