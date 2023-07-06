@@ -71,9 +71,9 @@ chat_datasets_count = 1000
 done_models = []
 include_rouge = False
 include_chatgpt = False
-generate_rateable_datasets = False
+generate_rateable_datasets = True
 generate_student_instructions = False
-generate_student_dialogs = True
+generate_student_dialogs = False
 student_instruction = """Formulate an instruction or a question towards Rob about the given input"""
 student_dialog = """Proactively continue the dialog provided in the input as the student"""
 
@@ -173,8 +173,34 @@ def build_rateable_dataset(model_name, my_robert):
         # Decomment the two lines below if you dont want a new line in the console.
         sys.stdout.write('Done with ' + str(count) + ' datasets. ')
 
-    # TODO: Do dialogs as well here!
-    pass
+    # Do dialogs as well here!
+    student_dialogs = db.get_filtered_student_dialogs(50)
+    print("Going through " + str(len(student_dialogs)) + " datasets.")
+    count = 1
+    for data in student_dialogs:
+        history = data['context'].split('\n')
+        instruction = history[len(history) - 1]
+        context = history[:-1]
+        # For here, we want to work with the input as context.
+        my_robert.set_context(context)
+        # the output of a student instruction dataset is a question for Rob
+        robs_answer = my_robert.get_response(instruction)
+
+        dataset = {
+            'instruction': instruction,
+            'output': robs_answer,
+            'input': data['context'],
+            'context': '',
+            'model': model_name,
+            'type': 'dialog',
+            'rating': 0,
+            'comment': '',
+            "isRated": False
+        }
+        db.get_database()['rateable_test_datasets'].insert_one(dataset)
+        count = count + 1
+        # Decomment the two lines below if you dont want a new line in the console.
+        sys.stdout.write('Done with ' + str(count) + ' datasets. ')
 
 
 def start_test_pipeline():

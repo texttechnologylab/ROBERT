@@ -56,6 +56,9 @@ class db:
     def get_student_dialogs(self, amount):
         return list(self.get_database()['student_dialogs'].find().sort("_id", 1).limit(amount))
 
+    def get_filtered_student_dialogs(self, amount):
+        return list(self.get_database()['student_dialogs_filtered'].find().sort("_id", 1).limit(amount))
+
     def get_student_dialogs_by_turn(self, amount, turn):
         return list(self.get_database()['student_dialogs'].find({"turns": turn}).sort("_id", 1).limit(amount))
 
