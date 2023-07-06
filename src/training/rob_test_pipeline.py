@@ -342,14 +342,17 @@ def continue_student_dialog_generation():
     last_turn = dialogs[0]["last_turn"]
     print("Last turn was: " + str(last_turn))
     my_model = ''
+    speaker = ''
     if(last_turn == "student"):
         print("Initing Robert as our model")
-        my_model = robert(finetuned_path=build_finetuned_path("robert_21k_chat_only_para"),
+        my_model = robert(finetuned_path=build_finetuned_path("robert_10k"),
                           context_amount=4, dtype="bfloat16")
+        speaker = "Rob"
     else:
         print("Initing the student as our model")
         my_model = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
                           is_student=True, context_amount=4, dtype="bfloat16")
+        speaker = "Student"
     # Now through each dialog, continue it.
     for dialog in dialogs:
         history = dialog['context'].split('\n')
@@ -367,12 +370,13 @@ def continue_student_dialog_generation():
             prompt = dialog["output"]
 
         answer = my_model.get_response(prompt)
+        history.append(speaker + ": " + answer)
         dataset = {
             "instruction": prompt,
             "output": answer,
             "context": "\n".join(history),
-            "model": "robert_21k_chat_only_para/student_22k_chat_para",
-            "last_turn": "student" if last_turn == "student" else "rob",
+            "model": "robert_10k/student_22k_chat_para",
+            "last_turn": speaker,
             "turns": turn + 1
         }
         db.get_database()['student_dialogs'].insert_one(dataset)
