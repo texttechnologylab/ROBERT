@@ -361,9 +361,10 @@ def continue_student_dialog_generation():
         # If we have a history, then pass in the chat history
         # Robert doesnt take the last instruction into the context
         if(last_turn == "Student"):
-            my_model.set_context(dialog['context'].split('\n')[:-1])
+            d = dialog['context'].split('\n')[:-1]
+            my_model.set_context(d[-4:])
         else:
-            my_model.set_context(dialog['context'].split('\n'))
+            my_model.set_context(dialog['context'].split('\n')[-4:])
 
         # The student gets the default prompt
         prompt = student_dialog
