@@ -151,6 +151,7 @@ def build_rateable_dataset(model_name, my_robert):
     student_instructions = db.get_student_instructions(9999)
     print("Going through " + str(len(student_instructions)) + " datasets.")
     count = 1
+    student_instructions = []
     for data in student_instructions:
         # For here, we want to work with the input as context.
         my_robert.clear_context()
@@ -174,6 +175,7 @@ def build_rateable_dataset(model_name, my_robert):
         sys.stdout.write('Done with ' + str(count) + ' datasets. ')
 
     # Do dialogs as well here!
+    print("Doing dialogs now")
     student_dialogs = db.get_filtered_student_dialogs(50)
     print("Going through " + str(len(student_dialogs)) + " datasets.")
     count = 1
