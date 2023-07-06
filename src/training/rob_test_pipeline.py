@@ -339,7 +339,7 @@ def continue_student_dialog_generation():
     turn = 1
     dialogs = db.get_student_dialogs_by_turn(9999, turn)
     print("Found " + str(len(dialogs)) + " dialogs of turn " + str(turn))
-    last_turn = dialogs[0].last_turn
+    last_turn = dialogs[0]["last_turn"]
     print("Last turn was: " + str(last_turn))
     my_model = ''
     if(last_turn == "student"):
