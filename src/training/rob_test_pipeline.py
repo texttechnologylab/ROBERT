@@ -315,21 +315,23 @@ def start_student_instruction_generation():
 
 def start_student_dialog_generation():
     '''Creates X amount of new instructions by a student for robert'''
-    my_student = robert(finetuned_path=build_finetuned_path("student_22k_chat_para"),
+    params = get_parameters()
+    my_student = robert(finetuned_path=build_finetuned_path("student_24k_para"),
                         is_student=True, context_amount=4, dtype="bfloat16")
-    for i in range(250):
+    for i in range(200):
         # context here is the chat history. We have none for now.
+        context = random.sample(params, random.randint(1, 2))
         history = []
-        my_student.set_context([])
+        my_student.set_context(context)
         # The response of the student model is an instruction for Rob
-        answer = my_student.get_response(student_dialog)
+        answer = my_student.get_response(student_instruction)
         history.append("Student: " + answer)
         dataset = {
             "instruction": student_dialog,
             "output": answer,
             "context": "\n".join(history),
-            "model": "student_22k_chat_para",
-            "last_turn": "student",
+            "model": "student_24k_para",
+            "last_turn": "Student",
             "turns": 1
         }
         db.get_database()['student_dialogs'].insert_one(dataset)
@@ -393,5 +395,5 @@ if __name__ == "__main__":
     if(generate_student_instructions):
         start_student_instruction_generation()
     if(generate_student_dialogs):
-        # start_student_dialog_generation()
-        continue_student_dialog_generation()
+        start_student_dialog_generation()
+        #continue_student_dialog_generation()
