@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/badge/Status-Under%20construction-red)]()
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This is the repository for R.O.B.E.R.T., a chatting assistant that self-instructs itself into a specificially provided context by generating the needed datasets itself and then finetuning the LLaMa model on these datasets.
+This is the repository for R.O.B.E.R.T., a chatting assistant that self-instructs into a specificially provided context by generating the needed datasets itself and then finetuning the LLaMa model on these datasets.
 This project wouldn't be possible without:
 
 - [Lighting-AI/lit-llama](https://github.com/Lightning-AI/lit-llama)
