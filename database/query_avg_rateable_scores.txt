@@ -1,0 +1,16 @@
+db.getCollection("rateable_test_datasets").aggregate([
+  {
+    "$match": {
+      "$and": [
+        { "isRated": true },
+        { "type": "dialog" }
+      ]
+    }
+  },
+  {
+    "$group": {
+      "_id": "$model",
+      "score": { "$avg": "$rating" }
+    }
+  }
+])
