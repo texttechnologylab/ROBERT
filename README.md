@@ -19,8 +19,6 @@ This project wouldn't be possible without:
 - [MetaAI/LLaMa](https://ai.facebook.com/blog/large-language-model-llama-meta-ai/)
 - [PEGASUS](https://github.com/google-research/pegasus)
 
-Special thanks also to the [Text Technology Lab](https://www.texttechnologylab.org/) of the Goethe University Frankfurt from which department this project originates from. 
-
 # ![ROBERT HAND ONLY Symbol_SMALL 800x600](https://github.com/TheItCrOw/R.O.B.E.R.T./assets/49918134/0de526b4-b39f-4159-b25c-397af3a55602) About
 
 This repository aims to provide a streamlined process for generating a language model that has the ability to assist and chat with users in a specific domain context: <b>Your own R.O.B.E.R.T.</b> 
